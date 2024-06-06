@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="add workspace config">
-      <change afterPath="$PROJECT_DIR$/lib/models/sams_information.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/volleylytics.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/volleylytics.iml" afterDir="false" />
+    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="Create SAMS data models">
+      <change afterPath="$PROJECT_DIR$/lib/models/match.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/player.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/score_event.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +86,7 @@
       <updated>1717683885049</updated>
       <workItem from="1717683886070" duration="638000" />
       <workItem from="1717684529874" duration="577000" />
-      <workItem from="1717685582031" duration="3361000" />
+      <workItem from="1717685582031" duration="4535000" />
     </task>
     <task id="LOCAL-00001" summary="flutter create">
       <option name="closed" value="true" />
@@ -106,7 +104,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717684425387</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Create SAMS data models">
+      <option name="closed" value="true" />
+      <created>1717688960143</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1717688960143</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,7 +121,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="flutter create" />
     <MESSAGE value="add workspace config" />
-    <option name="LAST_COMMIT_MESSAGE" value="add workspace config" />
+    <MESSAGE value="Create SAMS data models" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create SAMS data models" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
