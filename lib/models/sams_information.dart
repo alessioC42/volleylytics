@@ -1,6 +1,8 @@
 //This file contains data models for SAMS system responses on initial connect with websocket server at
 // wss://backend.sams-ticker.de/hvv
 
+typedef MatchSeriesId = String;
+
 /// Contains Match information in SAMS system
 class SAMSMatchInformation {
   final String matchId;
@@ -11,7 +13,7 @@ class SAMSMatchInformation {
   final DateTime matchDate;
   final bool indefinitelyRescheduled;
   final bool delayPossible;
-  final List<SAMSMatchSeries> matchSeries;
+  final MatchSeriesId matchSeriesId;
 
   SAMSMatchInformation({
     required this.matchId,
@@ -22,7 +24,7 @@ class SAMSMatchInformation {
     required this.matchDate,
     required this.indefinitelyRescheduled,
     required this.delayPossible,
-    required this.matchSeries,
+    required this.matchSeriesId,
   });
 
   factory SAMSMatchInformation.fromJson(Map<String, dynamic> json) {
@@ -35,8 +37,7 @@ class SAMSMatchInformation {
       matchDate: DateTime.parse(json['matchDate']),
       indefinitelyRescheduled: json['indefinitelyRescheduled'],
       delayPossible: json['delayPossible'],
-      matchSeries: (json['matchSeries'] as List).map((matchSeries) =>
-          SAMSMatchSeries.fromJson(matchSeries)).toList(),
+      matchSeriesId: json['matchSeries'],
     );
   }
 
@@ -50,7 +51,7 @@ class SAMSMatchInformation {
       'matchDate': matchDate.toIso8601String(),
       'indefinitelyRescheduled': indefinitelyRescheduled,
       'delayPossible': delayPossible,
-      'matchSeries': matchSeries,
+      'matchSeries': matchSeriesId,
     };
   }
 }
@@ -103,7 +104,7 @@ class SAMSTeam {
   final String shortName;
   final String clubCode;
   final String letter;
-  final String logo200url;
+  final String? logo200url;
 
   SAMSTeam({
     required this.teamId,

@@ -1,8 +1,16 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:volleylytics/globals.dart';
+import 'package:volleylytics/providers/sams_provider.dart';
+import 'package:volleylytics/views/matches_browser_view.dart';
+import 'package:volleylytics/views/players_editor.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initLocalStorage();
+  globals.initializeGlobals();
   runApp(const MyApp());
 }
 
@@ -14,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -31,7 +39,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +58,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           const SizedBox(height: 40),
           ListTile(
-            title: const Text('Matches'),
+            title: const Text('Players'),
             onTap: () {
               Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PlayersEditorView()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('SAMS Matches'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MatchesBrowserView()),
+              );
             },
           ),
           ListTile(
@@ -70,31 +91,21 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: 30,
-          itemBuilder: (context, index){
-          return ListTile(
-            title: Text('Item $index'),
-            subtitle: Text('Subtitle $index'),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.edit),
-                  onPressed: (){},
-                ),
-                IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: (){},
-                ),
-              ],
-            ),
-            onTap: (){},
-          );
-      }),
+      body: Center(
+        child: IconButton(
+          icon: const Icon(Icons.ac_unit),
+          onPressed: () async {
+            SamsProvider samsProvider = SamsProvider();
+            await samsProvider.initializeSocket();
+            await Future.delayed(const Duration(seconds: 5));
+            debugPrint(samsProvider.matchSeries.length.toString());
+            samsProvider.closeSocket();
+          },
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-        tooltip: 'Increment',
+        onPressed: () {},
+        tooltip: 'Add Player',
         child: const Icon(Icons.add),
       ),
     );
