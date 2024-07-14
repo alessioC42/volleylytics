@@ -3,9 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:volleylytics/globals.dart';
-import 'package:volleylytics/providers/sams_provider.dart';
+import 'package:volleylytics/models/player_lineup.dart';
 import 'package:volleylytics/views/matches_browser_view.dart';
 import 'package:volleylytics/views/players/players_view.dart';
+import 'package:volleylytics/widgets/lineup_editor.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +40,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final lineup = PlayerLineup(positions: [globals.playerProvider.players[0], globals.playerProvider.players[1], globals.playerProvider.players[2], globals.playerProvider.players[3], globals.playerProvider.players[4], globals.playerProvider.players[5]]);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,19 +95,18 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: Center(
-        child: IconButton(
-          icon: const Icon(Icons.ac_unit),
-          onPressed: () async {
-            SamsProvider samsProvider = SamsProvider();
-            await samsProvider.initializeSocket();
-            await Future.delayed(const Duration(seconds: 5));
-            debugPrint(samsProvider.matchSeries.length.toString());
-            samsProvider.closeSocket();
-          },
+        child: LineupEditor(
+          lineup: lineup,
+          boardSize: const Size(400, 400),
+          padding: 100,
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            lineup.rotate();
+          });
+        },
         tooltip: 'Add Player',
         child: const Icon(Icons.add),
       ),

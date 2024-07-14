@@ -13,8 +13,6 @@ class PlayersView extends StatefulWidget {
 }
 
 class _PlayersViewState extends State<PlayersView> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

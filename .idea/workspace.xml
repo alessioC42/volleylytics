@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="update README.md">
-      <change afterPath="$PROJECT_DIR$/lib/views/players/player_editor_view.dart" afterDir="false" />
+    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="create/delete/edit players">
+      <change afterPath="$PROJECT_DIR$/lib/models/player_lineup.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/lineup_editor.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/player.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/providers/player_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/providers/player_provider.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/players_editor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/players/players_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/players/players_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/players/players_view.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +93,8 @@
       <workItem from="1717945565520" duration="6917000" />
       <workItem from="1718627042994" duration="13000" />
       <workItem from="1720951478591" duration="2665000" />
-      <workItem from="1720956719933" duration="7952000" />
+      <workItem from="1720956719933" duration="9054000" />
+      <workItem from="1720976557803" duration="10041000" />
     </task>
     <task id="LOCAL-00001" summary="flutter create">
       <option name="closed" value="true" />
@@ -145,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720960133752</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="create/delete/edit players">
+      <option name="closed" value="true" />
+      <created>1720964682982</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1720964682982</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,7 +176,8 @@
     <MESSAGE value="add more models" />
     <MESSAGE value="initial player data setup" />
     <MESSAGE value="update README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="update README.md" />
+    <MESSAGE value="create/delete/edit players" />
+    <option name="LAST_COMMIT_MESSAGE" value="create/delete/edit players" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
