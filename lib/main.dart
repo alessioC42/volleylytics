@@ -5,7 +5,7 @@ import 'package:localstorage/localstorage.dart';
 import 'package:volleylytics/globals.dart';
 import 'package:volleylytics/providers/sams_provider.dart';
 import 'package:volleylytics/views/matches_browser_view.dart';
-import 'package:volleylytics/views/players_editor.dart';
+import 'package:volleylytics/views/players/players_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PlayersEditorView()),
+                MaterialPageRoute(builder: (context) => const PlayersView()),
               );
             },
           ),

@@ -4,23 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="add more models">
-      <change afterPath="$PROJECT_DIR$/lib/globals.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/providers/player_provider.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/providers/sams_provider.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/views/matches_browser_view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/views/players_editor.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/sams_match_list_tile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/volleylytics.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/volleylytics.iml" afterDir="false" />
+    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="update README.md">
+      <change afterPath="$PROJECT_DIR$/lib/views/players/player_editor_view.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/models/player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/player.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/sams_information.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/sams_information.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/score_event.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/providers/player_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/providers/player_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/players_editor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/players/players_view.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +62,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/views/players" />
       <recent name="$PROJECT_DIR$/assets/images" />
     </key>
   </component>
@@ -103,7 +95,7 @@
       <workItem from="1717945565520" duration="6917000" />
       <workItem from="1718627042994" duration="13000" />
       <workItem from="1720951478591" duration="2665000" />
-      <workItem from="1720956719933" duration="2717000" />
+      <workItem from="1720956719933" duration="7952000" />
     </task>
     <task id="LOCAL-00001" summary="flutter create">
       <option name="closed" value="true" />
@@ -137,7 +129,23 @@
       <option name="project" value="LOCAL" />
       <updated>1717690846230</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="initial player data setup">
+      <option name="closed" value="true" />
+      <created>1720959516503</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720959516503</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update README.md">
+      <option name="closed" value="true" />
+      <created>1720960133752</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1720960133752</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,7 +167,9 @@
     <MESSAGE value="add workspace config" />
     <MESSAGE value="Create SAMS data models" />
     <MESSAGE value="add more models" />
-    <option name="LAST_COMMIT_MESSAGE" value="add more models" />
+    <MESSAGE value="initial player data setup" />
+    <MESSAGE value="update README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="update README.md" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

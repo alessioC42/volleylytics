@@ -1,26 +1,24 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:volleylytics/globals.dart';
 
-import '../models/player.dart';
+import '../../models/player.dart';
+import 'player_editor_view.dart';
 
 
-class PlayersEditorView extends StatefulWidget {
-  const PlayersEditorView({super.key});
+class PlayersView extends StatefulWidget {
+  const PlayersView({super.key});
 
   @override
-  State<PlayersEditorView> createState() => _PlayersEditorViewState();
+  State<PlayersView> createState() => _PlayersViewState();
 }
 
-class _PlayersEditorViewState extends State<PlayersEditorView> {
+class _PlayersViewState extends State<PlayersView> {
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Players"),
       ),
       body: ListView.builder(
@@ -51,15 +49,18 @@ class _PlayersEditorViewState extends State<PlayersEditorView> {
                 padding: const EdgeInsets.all(8),
                 child: Text(globals.playerProvider.players[index].number, style: Theme.of(context).textTheme.displaySmall),
               ),
-              onTap: () {
-
+              onTap: () async {
+                await Navigator.of(context).push(MaterialPageRoute(builder: (context) => PlayerEditorView(editIndex: index,)));
+                setState(() {});
               },
             );
           }
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: ()  {
+        onPressed: () async {
+          await Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PlayerEditorView()));
+          setState(() {});
         },
       ),
     );

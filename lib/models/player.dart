@@ -15,6 +15,21 @@ extension PlayerPositionExtension on PlayerPosition {
     return toShortString().substring(0, 1);
   }
 
+  String getDisplayName() {
+    switch (this) {
+      case PlayerPosition.AUSSEN:
+        return 'Außen';
+      case PlayerPosition.MITTE:
+        return 'Mitte';
+      case PlayerPosition.LIBERO:
+        return 'Libero';
+      case PlayerPosition.ZUSPIELER:
+        return 'Zuspieler';
+      case PlayerPosition.DIAGONAL:
+        return 'Diagonal';
+    }
+  }
+
   static PlayerPosition fromShortString(String str) {
     switch (str) {
       case 'AUSSEN':

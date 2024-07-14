@@ -20,4 +20,8 @@ class PlayerProvider {
     final jsonEncoded = jsonEncode(newPlayerData);
     localStorage.setItem(storageKey, jsonEncoded);
   }
+
+  bool doesCaptainExist() {
+    return players.any((player) => player.isCaptain);
+  }
 }
