@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
-
 import '../models/sams_information.dart';
 
 ///Interface to access the SAMS-Ticker websocket API
 ///
 /// Currently hard coded on HVV
 class SamsProvider {
-  static const apiUri = 'wss://backend.sams-ticker.de/hvv'; //todo: make this configurable
-  
+  static const apiUri =
+      'wss://backend.sams-ticker.de/hvv'; //todo: make this configurable
+
   late final WebSocket channel;
 
   List<SAMSMatchSeries> matchSeries = [];
@@ -27,20 +27,20 @@ class SamsProvider {
         for (final seriesId in (payload['matchSeries'].keys)) {
           final matchSeries = payload['matchSeries'][seriesId];
           this.matchSeries.add(SAMSMatchSeries(
-            seriesId: matchSeries['id'],
-            name: matchSeries['name'],
-            shortName: matchSeries['shortName'],
-            gender: matchSeries['gender'],
-            seriesClass: matchSeries['class'],
-            teams: (matchSeries['teams'].map((team) => SAMSTeam(
-              teamId: team['id'],
-              name: team['name'],
-              shortName: team['shortName'],
-              clubCode: team['clubCode'],
-              letter: team['letter'],
-              logo200url: team['logoImage200'],
-            ))).toList().cast<SAMSTeam>(),
-          ));
+                seriesId: matchSeries['id'],
+                name: matchSeries['name'],
+                shortName: matchSeries['shortName'],
+                gender: matchSeries['gender'],
+                seriesClass: matchSeries['class'],
+                teams: (matchSeries['teams'].map((team) => SAMSTeam(
+                      teamId: team['id'],
+                      name: team['name'],
+                      shortName: team['shortName'],
+                      clubCode: team['clubCode'],
+                      letter: team['letter'],
+                      logo200url: team['logoImage200'],
+                    ))).toList().cast<SAMSTeam>(),
+              ));
         }
         for (final matchDay in payload['matchDays']) {
           DateTime date = DateTime.parse(matchDay['date']);
@@ -55,7 +55,8 @@ class SamsProvider {
               matchSeriesId: match['matchSeries'],
               delayPossible: match['delayPossible'],
               indefinitelyRescheduled: match['indefinitelyRescheduled'],
-              matchDate: DateTime.fromMillisecondsSinceEpoch(match['date'] * 1000),
+              matchDate:
+                  DateTime.fromMillisecondsSinceEpoch(match['date'] * 1000),
             ));
           }
           this.matches.addAll(matches);
@@ -71,7 +72,9 @@ class SamsProvider {
 
   SAMSTeam? getTeamById(String id) {
     if (matchSeries.isEmpty) return null;
-    return matchSeries.expand((series) => series.teams).firstWhere((team) => team.teamId == id);
+    return matchSeries
+        .expand((series) => series.teams)
+        .firstWhere((team) => team.teamId == id);
   }
 
   void closeSocket() {

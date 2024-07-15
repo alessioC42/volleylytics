@@ -4,10 +4,8 @@ import 'package:flutter/services.dart';
 import '../../globals.dart';
 import '../../models/player.dart';
 
-
 class PlayerEditorView extends StatefulWidget {
   final int? editIndex;
-
 
   const PlayerEditorView({super.key, this.editIndex});
 
@@ -25,7 +23,8 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
   bool isCaptain = false;
   PlayerPosition? position;
 
-  @override void initState() {
+  @override
+  void initState() {
     isEditMode = widget.editIndex != null;
 
     if (isEditMode) {
@@ -33,7 +32,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
       firstNameController.text = player.firstName;
       secondNameController.text = player.secondName;
       numberController.text = player.number;
-      nicknameController.text = player.nickname??"";
+      nicknameController.text = player.nickname ?? "";
       isCaptain = player.isCaptain;
       position = player.position;
     }
@@ -53,37 +52,42 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
               icon: const Icon(Icons.delete),
               onPressed: () {
                 showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: const Text("Delete Player?"),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text("Are you sure you want to delete this player?", style: Theme.of(context).textTheme.labelLarge,),
-                            Text("${globals.playerProvider.players[widget.editIndex!].firstName} ${globals.playerProvider.players[widget.editIndex!].secondName}, ${globals.playerProvider.players[widget.editIndex!].number}", style: Theme.of(context).textTheme.titleLarge,)
-                          ]
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("Cancel"),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            globals.playerProvider.players.removeAt(widget.editIndex!);
-                            globals.playerProvider.savePlayers(globals.playerProvider.players);
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("Delete"),
-                        )
-                      ],
-                    );
-                  }
-                );
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text("Delete Player?"),
+                        content:
+                            Column(mainAxisSize: MainAxisSize.min, children: [
+                          Text(
+                            "Are you sure you want to delete this player?",
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          Text(
+                            "${globals.playerProvider.players[widget.editIndex!].firstName} ${globals.playerProvider.players[widget.editIndex!].secondName}, ${globals.playerProvider.players[widget.editIndex!].number}",
+                            style: Theme.of(context).textTheme.titleLarge,
+                          )
+                        ]),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("Cancel"),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              globals.playerProvider.players
+                                  .removeAt(widget.editIndex!);
+                              globals.playerProvider
+                                  .savePlayers(globals.playerProvider.players);
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("Delete"),
+                          )
+                        ],
+                      );
+                    });
               },
             )
         ],
@@ -94,25 +98,26 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
           children: [
             TextFormField(
               controller: firstNameController,
-              decoration: const InputDecoration(
-                  labelText: "First Name"
-              ),
+              decoration: const InputDecoration(labelText: "First Name"),
             ),
-            const SizedBox(height: 8,),
+            const SizedBox(
+              height: 8,
+            ),
             TextFormField(
               controller: secondNameController,
-              decoration: const InputDecoration(
-                  labelText: "Second Name"
-              ),
+              decoration: const InputDecoration(labelText: "Second Name"),
             ),
-            const SizedBox(height: 8,),
+            const SizedBox(
+              height: 8,
+            ),
             TextFormField(
               controller: nicknameController,
-              decoration: const InputDecoration(
-                  labelText: "Nickname (optional)"
-              ),
+              decoration:
+                  const InputDecoration(labelText: "Nickname (optional)"),
             ),
-            const SizedBox(height: 8,),
+            const SizedBox(
+              height: 8,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -123,9 +128,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                     ],
-                    decoration: const InputDecoration(
-                        labelText: "Number"
-                    ),
+                    decoration: const InputDecoration(labelText: "Number"),
                   ),
                 ),
                 DropdownButton<PlayerPosition>(
@@ -135,32 +138,53 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                       position = newValue;
                     });
                   },
-                  items: [const DropdownMenuItem(value: null, child: Text("---")), ...PlayerPosition.values.map<DropdownMenuItem<PlayerPosition>>((PlayerPosition value) {
-                    return DropdownMenuItem<PlayerPosition>(
-                      value: value,
-                      child: Text(value.getDisplayName()),
-                    );
-                  }).toList()],
+                  items: [
+                    const DropdownMenuItem(value: null, child: Text("---")),
+                    ...PlayerPosition.values
+                        .map<DropdownMenuItem<PlayerPosition>>(
+                            (PlayerPosition value) {
+                      return DropdownMenuItem<PlayerPosition>(
+                        value: value,
+                        child: Text(value.getDisplayName()),
+                      );
+                    }).toList()
+                  ],
                 ),
-                IconButton(onPressed: (){
-                  setState(() {
-                    if (!isCaptain && globals.playerProvider.doesCaptainExist()) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("There can only be one captain.")));
-                      return;
-                    }
-                    isCaptain = !isCaptain;
-                  });
-                }, icon: isCaptain ? const Icon(Icons.star, color: Colors.yellow,) : const Icon(Icons.star_border),
-                iconSize: 35,
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (!isCaptain &&
+                          globals.playerProvider.doesCaptainExist()) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content:
+                                    Text("There can only be one captain.")));
+                        return;
+                      }
+                      isCaptain = !isCaptain;
+                    });
+                  },
+                  icon: isCaptain
+                      ? const Icon(
+                          Icons.star,
+                          color: Colors.yellow,
+                        )
+                      : const Icon(Icons.star_border),
+                  iconSize: 35,
                 ),
               ],
             ),
-            const SizedBox(height: 8,),
+            const SizedBox(
+              height: 8,
+            ),
             ElevatedButton(
               onPressed: () {
                 //validate inputs
-                if (firstNameController.text.trim() == "" || secondNameController.text.trim() == "" || numberController.text.trim() == "") {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill out all fields")));
+                if (firstNameController.text.trim() == "" ||
+                    secondNameController.text.trim() == "" ||
+                    numberController.text.trim() == "") {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Please fill out all fields")));
                   return;
                 }
 
@@ -168,7 +192,9 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                   firstName: firstNameController.text.trim(),
                   secondName: secondNameController.text.trim(),
                   number: numberController.text,
-                  nickname: nicknameController.text.trim() == "" ? null : nicknameController.text.trim(),
+                  nickname: nicknameController.text.trim() == ""
+                      ? null
+                      : nicknameController.text.trim(),
                   isCaptain: isCaptain,
                   position: position,
                 );
@@ -178,7 +204,8 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                 } else {
                   globals.playerProvider.players.add(newPlayer);
                 }
-                globals.playerProvider.savePlayers(globals.playerProvider.players);
+                globals.playerProvider
+                    .savePlayers(globals.playerProvider.players);
 
                 Navigator.of(context).pop();
               },
@@ -187,7 +214,6 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
           ],
         ),
       ),
-
     );
   }
 }

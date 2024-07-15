@@ -40,7 +40,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final lineup = PlayerLineup(positions: [globals.playerProvider.players[0], globals.playerProvider.players[1], globals.playerProvider.players[2], globals.playerProvider.players[3], globals.playerProvider.players[4], globals.playerProvider.players[5]]);
+  final lineup = PlayerLineup(positions: [
+    globals.playerProvider.players[0],
+    globals.playerProvider.players[1],
+    globals.playerProvider.players[2],
+    globals.playerProvider.players[3],
+    globals.playerProvider.players[4],
+    globals.playerProvider.players[5]
+  ]);
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const MatchesBrowserView()),
+                MaterialPageRoute(
+                    builder: (context) => const MatchesBrowserView()),
               );
             },
           ),

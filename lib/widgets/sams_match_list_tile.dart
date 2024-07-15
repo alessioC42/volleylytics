@@ -21,35 +21,37 @@ class SamsMatchListTile extends ListTile {
 
   @override
   get title => Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Expanded(
-        child: Text(
-          team1.shortName != "" ? team1.shortName : team1.name,
-          style: teamFontStyle,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ),
-      const Text("vs."),
-      Expanded(
-        child: Text(
-          team2.shortName != "" ? team2.shortName : team2.name,
-          style: teamFontStyle,
-          overflow: TextOverflow.ellipsis,
-          textAlign: TextAlign.end,
-        ),
-      ),
-    ],
-  );
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Text(
+              team1.shortName != "" ? team1.shortName : team1.name,
+              style: teamFontStyle,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const Text("vs."),
+          Expanded(
+            child: Text(
+              team2.shortName != "" ? team2.shortName : team2.name,
+              style: teamFontStyle,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.end,
+            ),
+          ),
+        ],
+      );
 
   @override
   get subtitle => Text(dateFormatted());
 
   @override
-  get leading => Image.network(team1.logo200url ?? "https://via.placeholder.com/150");
+  get leading =>
+      Image.network(team1.logo200url ?? "https://via.placeholder.com/150");
 
   @override
-  get trailing => Image.network(team2.logo200url ?? "https://via.placeholder.com/150");
+  get trailing =>
+      Image.network(team2.logo200url ?? "https://via.placeholder.com/150");
 
   String dateFormatted() {
     // pattern example: Mo, 17.05 12:00

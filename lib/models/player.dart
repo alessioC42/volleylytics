@@ -1,10 +1,4 @@
-enum PlayerPosition {
-  AUSSEN,
-  MITTE,
-  LIBERO,
-  ZUSPIELER,
-  DIAGONAL
-}
+enum PlayerPosition { AUSSEN, MITTE, LIBERO, ZUSPIELER, DIAGONAL }
 
 extension PlayerPositionExtension on PlayerPosition {
   String toShortString() {
@@ -56,14 +50,13 @@ class Player {
   PlayerPosition? position;
   bool isCaptain;
 
-  Player({
-    required this.firstName,
-    required this.secondName,
-    required this.number,
-    this.position,
-    this.nickname,
-    this.isCaptain = false
-  });
+  Player(
+      {required this.firstName,
+      required this.secondName,
+      required this.number,
+      this.position,
+      this.nickname,
+      this.isCaptain = false});
 
   get displayName => nickname ?? secondName;
 
@@ -83,7 +76,9 @@ class Player {
       firstName: json['firstName'],
       secondName: json['secondName'],
       number: json['number'],
-      position: json['position'] != null ? PlayerPositionExtension.fromShortString(json['position']) : null,
+      position: json['position'] != null
+          ? PlayerPositionExtension.fromShortString(json['position'])
+          : null,
       nickname: json['nickname'],
       isCaptain: json['isCaptain'] ?? false,
     );

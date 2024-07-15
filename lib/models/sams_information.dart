@@ -62,6 +62,7 @@ class SAMSMatchSeries {
   final String name;
   final String seriesClass;
   final String shortName;
+
   /// "MALE" or "FEMALE" todo: enum
   final String gender;
   final List<SAMSTeam> teams;
@@ -82,8 +83,11 @@ class SAMSMatchSeries {
       seriesClass: json['seriesClass'],
       shortName: json['shortName'],
       gender: json['gender'],
-      teams: (json['teams'] as List).map((team) => SAMSTeam.fromJson(team)).toList(),
-    );}
+      teams: (json['teams'] as List)
+          .map((team) => SAMSTeam.fromJson(team))
+          .toList(),
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {

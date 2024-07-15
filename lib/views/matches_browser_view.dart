@@ -22,7 +22,7 @@ class _MatchesBrowserViewState extends State<MatchesBrowserView> {
           itemCount: globals.samsProvider.matches.length,
           itemBuilder: (context, index) {
             return SamsMatchListTile(
-                matchInformation: globals.samsProvider.matches[index],
+              matchInformation: globals.samsProvider.matches[index],
             );
           }),
     );

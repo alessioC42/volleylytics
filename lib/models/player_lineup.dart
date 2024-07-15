@@ -11,7 +11,8 @@ class PlayerLineup {
   }
 
   bool setRotation(int lauefer) {
-    if (!(positions.any((player) => player.position == PlayerPosition.ZUSPIELER))) return false;
+    if (!(positions.any(
+        (player) => player.position == PlayerPosition.ZUSPIELER))) return false;
     while (!(positions[lauefer].position == PlayerPosition.ZUSPIELER)) {
       rotate();
     }

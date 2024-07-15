@@ -8,7 +8,11 @@ class LineupEditor extends StatelessWidget {
   final Size boardSize;
   final double padding;
 
-  const LineupEditor({super.key, required this.lineup, required this.boardSize, required this.padding});
+  const LineupEditor(
+      {super.key,
+      required this.lineup,
+      required this.boardSize,
+      required this.padding});
 
   final borderWidth = 4.0;
   final backgroundColor = Colors.orangeAccent;
@@ -44,9 +48,18 @@ class LineupEditor extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Expanded(child: NumberContainer(player: lineup.positions[3], onTap: () => debugPrint('4'))),
-                Expanded(child: NumberContainer(player: lineup.positions[2], onTap: () => debugPrint('3'))),
-                Expanded(child: NumberContainer(player: lineup.positions[1], onTap: () => debugPrint('2'))),
+                Expanded(
+                    child: NumberContainer(
+                        player: lineup.positions[3],
+                        onTap: () => debugPrint('4'))),
+                Expanded(
+                    child: NumberContainer(
+                        player: lineup.positions[2],
+                        onTap: () => debugPrint('3'))),
+                Expanded(
+                    child: NumberContainer(
+                        player: lineup.positions[1],
+                        onTap: () => debugPrint('2'))),
               ],
             ),
           ),
@@ -58,9 +71,18 @@ class LineupEditor extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Expanded(child: NumberContainer(player: lineup.positions[4], onTap: () => debugPrint('5'))),
-                Expanded(child: NumberContainer(player: lineup.positions[5], onTap: () => debugPrint('6'))),
-                Expanded(child: NumberContainer(player: lineup.positions[0], onTap: () => debugPrint('1'))),
+                Expanded(
+                    child: NumberContainer(
+                        player: lineup.positions[4],
+                        onTap: () => debugPrint('5'))),
+                Expanded(
+                    child: NumberContainer(
+                        player: lineup.positions[5],
+                        onTap: () => debugPrint('6'))),
+                Expanded(
+                    child: NumberContainer(
+                        player: lineup.positions[0],
+                        onTap: () => debugPrint('1'))),
               ],
             ),
           )
@@ -69,7 +91,6 @@ class LineupEditor extends StatelessWidget {
     );
   }
 }
-
 
 class NumberContainer extends StatelessWidget {
   final Player player;
@@ -90,9 +111,14 @@ class NumberContainer extends StatelessWidget {
               color: Theme.of(context).colorScheme.tertiaryContainer,
             ),
             padding: const EdgeInsets.all(6),
-            child: Text(player.number, style: Theme.of(context).textTheme.displaySmall),
+            child: Text(player.number,
+                style: Theme.of(context).textTheme.displaySmall),
           ),
-          Text(player.displayName, style: Theme.of(context).textTheme.titleLarge, overflow: TextOverflow.ellipsis,),
+          Text(
+            player.displayName,
+            style: Theme.of(context).textTheme.titleLarge,
+            overflow: TextOverflow.ellipsis,
+          ),
         ],
       ),
     );
