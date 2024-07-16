@@ -25,15 +25,15 @@ class SamsMatchListTile extends ListTile {
         children: [
           Expanded(
             child: Text(
-              team1.shortName != "" ? team1.shortName : team1.name,
+              team1.shortName != '' ? team1.shortName : team1.name,
               style: teamFontStyle,
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          const Text("vs."),
+          const Text('vs.'),
           Expanded(
             child: Text(
-              team2.shortName != "" ? team2.shortName : team2.name,
+              team2.shortName != '' ? team2.shortName : team2.name,
               style: teamFontStyle,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.end,
@@ -47,14 +47,14 @@ class SamsMatchListTile extends ListTile {
 
   @override
   get leading =>
-      Image.network(team1.logo200url ?? "https://via.placeholder.com/150");
+      Image.network(team1.logo200url ?? 'https://via.placeholder.com/150');
 
   @override
   get trailing =>
-      Image.network(team2.logo200url ?? "https://via.placeholder.com/150");
+      Image.network(team2.logo200url ?? 'https://via.placeholder.com/150');
 
   String dateFormatted() {
     // pattern example: Mo, 17.05 12:00
-    return "${matchInformation.matchDate.weekday}, ${matchInformation.matchDate.day}.${matchInformation.matchDate.month} ${matchInformation.matchDate.hour}:${matchInformation.matchDate.minute}";
+    return '${matchInformation.matchDate.weekday}, ${matchInformation.matchDate.day}.${matchInformation.matchDate.month} ${matchInformation.matchDate.hour}:${matchInformation.matchDate.minute}';
   }
 }

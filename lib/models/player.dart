@@ -37,7 +37,7 @@ extension PlayerPositionExtension on PlayerPosition {
       case 'DIAGONAL':
         return PlayerPosition.DIAGONAL;
       default:
-        throw ArgumentError("Unknown player position string: $str");
+        throw ArgumentError('Unknown player position string: $str');
     }
   }
 }

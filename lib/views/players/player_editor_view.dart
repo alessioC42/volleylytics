@@ -32,7 +32,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
       firstNameController.text = player.firstName;
       secondNameController.text = player.secondName;
       numberController.text = player.number;
-      nicknameController.text = player.nickname ?? "";
+      nicknameController.text = player.nickname ?? '';
       isCaptain = player.isCaptain;
       position = player.position;
     }
@@ -45,7 +45,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text((isEditMode) ? "Edit Player" : "Create new Player"),
+        title: Text((isEditMode) ? 'Edit Player' : 'Create new Player'),
         actions: [
           if (isEditMode)
             IconButton(
@@ -55,15 +55,15 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: const Text("Delete Player?"),
+                        title: const Text('Delete Player?'),
                         content:
                             Column(mainAxisSize: MainAxisSize.min, children: [
                           Text(
-                            "Are you sure you want to delete this player?",
+                            'Are you sure you want to delete this player?',
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
-                            "${globals.playerProvider.players[widget.editIndex!].firstName} ${globals.playerProvider.players[widget.editIndex!].secondName}, ${globals.playerProvider.players[widget.editIndex!].number}",
+                            '${globals.playerProvider.players[widget.editIndex!].firstName} ${globals.playerProvider.players[widget.editIndex!].secondName}, ${globals.playerProvider.players[widget.editIndex!].number}',
                             style: Theme.of(context).textTheme.titleLarge,
                           )
                         ]),
@@ -72,7 +72,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: const Text("Cancel"),
+                            child: const Text('Cancel'),
                           ),
                           TextButton(
                             onPressed: () {
@@ -83,7 +83,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                                   .savePlayers(globals.playerProvider.players);
                               Navigator.of(context).pop();
                             },
-                            child: const Text("Delete"),
+                            child: const Text('Delete'),
                           )
                         ],
                       );
@@ -98,14 +98,14 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
           children: [
             TextFormField(
               controller: firstNameController,
-              decoration: const InputDecoration(labelText: "First Name"),
+              decoration: const InputDecoration(labelText: 'First Name'),
             ),
             const SizedBox(
               height: 8,
             ),
             TextFormField(
               controller: secondNameController,
-              decoration: const InputDecoration(labelText: "Second Name"),
+              decoration: const InputDecoration(labelText: 'Second Name'),
             ),
             const SizedBox(
               height: 8,
@@ -113,7 +113,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
             TextFormField(
               controller: nicknameController,
               decoration:
-                  const InputDecoration(labelText: "Nickname (optional)"),
+                  const InputDecoration(labelText: 'Nickname (optional)'),
             ),
             const SizedBox(
               height: 8,
@@ -128,7 +128,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                     ],
-                    decoration: const InputDecoration(labelText: "Number"),
+                    decoration: const InputDecoration(labelText: 'Number'),
                   ),
                 ),
                 DropdownButton<PlayerPosition>(
@@ -139,7 +139,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                     });
                   },
                   items: [
-                    const DropdownMenuItem(value: null, child: Text("---")),
+                    const DropdownMenuItem(value: null, child: Text('---')),
                     ...PlayerPosition.values
                         .map<DropdownMenuItem<PlayerPosition>>(
                             (PlayerPosition value) {
@@ -147,7 +147,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                         value: value,
                         child: Text(value.getDisplayName()),
                       );
-                    }).toList()
+                    })
                   ],
                 ),
                 IconButton(
@@ -158,7 +158,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content:
-                                    Text("There can only be one captain.")));
+                                    Text('There can only be one captain.')));
                         return;
                       }
                       isCaptain = !isCaptain;
@@ -180,11 +180,11 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
             ElevatedButton(
               onPressed: () {
                 //validate inputs
-                if (firstNameController.text.trim() == "" ||
-                    secondNameController.text.trim() == "" ||
-                    numberController.text.trim() == "") {
+                if (firstNameController.text.trim() == '' ||
+                    secondNameController.text.trim() == '' ||
+                    numberController.text.trim() == '') {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("Please fill out all fields")));
+                      content: Text('Please fill out all fields')));
                   return;
                 }
 
@@ -192,7 +192,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                   firstName: firstNameController.text.trim(),
                   secondName: secondNameController.text.trim(),
                   number: numberController.text,
-                  nickname: nicknameController.text.trim() == ""
+                  nickname: nicknameController.text.trim() == ''
                       ? null
                       : nicknameController.text.trim(),
                   isCaptain: isCaptain,
@@ -209,7 +209,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
 
                 Navigator.of(context).pop();
               },
-              child: const Text("Save Player"),
+              child: const Text('Save Player'),
             )
           ],
         ),

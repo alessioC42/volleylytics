@@ -6,7 +6,7 @@ import 'package:volleylytics/globals.dart';
 import 'package:volleylytics/models/player_lineup.dart';
 import 'package:volleylytics/views/matches_browser_view.dart';
 import 'package:volleylytics/views/players/players_view.dart';
-import 'package:volleylytics/widgets/lineup_editor.dart';
+import 'package:volleylytics/widgets/lineup_display.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -103,10 +103,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: Center(
-        child: LineupEditor(
+        child: LineupDisplay(
           lineup: lineup,
-          boardSize: const Size(400, 400),
-          padding: 100,
+          onTap: (index) {
+            debugPrint('Tapped $index');
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(

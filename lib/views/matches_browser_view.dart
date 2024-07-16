@@ -16,7 +16,7 @@ class _MatchesBrowserViewState extends State<MatchesBrowserView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Matches Today"),
+        title: const Text('Matches Today'),
       ),
       body: ListView.builder(
           itemCount: globals.samsProvider.matches.length,

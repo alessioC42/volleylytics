@@ -18,4 +18,13 @@ class PlayerLineup {
     }
     return true;
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'positions': positions.map((player) => player.toJson()).toList(),
+    };
+  }
+
+  PlayerLineup.fromJson(Map<String, dynamic> json) :
+    positions = json['positions'].map<Player>((player) => Player.fromJson(player)).toList();
 }

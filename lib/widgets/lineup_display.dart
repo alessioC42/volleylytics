@@ -3,25 +3,27 @@ import 'package:flutter/material.dart';
 import '../models/player.dart';
 import '../models/player_lineup.dart';
 
-class LineupEditor extends StatelessWidget {
-  final PlayerLineup lineup;
-  final Size boardSize;
-  final double padding;
+typedef OnTapCallback = void Function(int index);
 
-  const LineupEditor(
-      {super.key,
-      required this.lineup,
-      required this.boardSize,
-      required this.padding});
+class LineupDisplay extends StatelessWidget {
+  final PlayerLineup lineup;
+  final OnTapCallback onTap;
+
+  const LineupDisplay(
+      {super.key, required this.lineup, required this.onTap});
 
   final borderWidth = 4.0;
   final backgroundColor = Colors.orangeAccent;
 
   @override
   Widget build(BuildContext context) {
+    // Maximum Square board size
+    Size boardSize = MediaQuery.of(context).size;
+    boardSize = Size.square(boardSize.width < boardSize.height ? boardSize.width : boardSize.height);
+
     return Container(
-      width: boardSize.width - padding / 2,
-      height: boardSize.height - padding / 2,
+      height: boardSize.height,
+      width: boardSize.width,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: borderWidth),
         color: backgroundColor,
@@ -44,45 +46,45 @@ class LineupEditor extends StatelessWidget {
             top: 0,
             left: 0,
             height: boardSize.height / 3,
-            width: boardSize.width - padding / 2,
+            width: boardSize.width,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Expanded(
                     child: NumberContainer(
                         player: lineup.positions[3],
-                        onTap: () => debugPrint('4'))),
+                        onTap: () => onTap(3))),
                 Expanded(
                     child: NumberContainer(
                         player: lineup.positions[2],
-                        onTap: () => debugPrint('3'))),
+                        onTap: () => onTap(2))),
                 Expanded(
                     child: NumberContainer(
                         player: lineup.positions[1],
-                        onTap: () => debugPrint('2'))),
+                        onTap: () => onTap(1))),
               ],
             ),
           ),
           Positioned(
-            top: (boardSize.height / 5) * 2,
+            top: (boardSize.height / 7) * 3,
             left: 0,
             height: boardSize.height / 3,
-            width: boardSize.width - padding / 2,
+            width: boardSize.width,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Expanded(
                     child: NumberContainer(
                         player: lineup.positions[4],
-                        onTap: () => debugPrint('5'))),
+                        onTap: () => onTap(4))),
                 Expanded(
                     child: NumberContainer(
                         player: lineup.positions[5],
-                        onTap: () => debugPrint('6'))),
+                        onTap: () => onTap(5))),
                 Expanded(
                     child: NumberContainer(
                         player: lineup.positions[0],
-                        onTap: () => debugPrint('1'))),
+                        onTap: () => onTap(0))),
               ],
             ),
           )

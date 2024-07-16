@@ -7,7 +7,6 @@ Monitor players in game, track their actions and find common mistakes. Basically
 ### Roadmap
 
 - [x] Player management
-- [ ] Event management/Custom events
 - [ ] Game management
 - [ ] Game editor
 - [ ] Export/Import games/team data

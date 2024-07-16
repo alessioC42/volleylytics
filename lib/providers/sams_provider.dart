@@ -43,7 +43,6 @@ class SamsProvider {
               ));
         }
         for (final matchDay in payload['matchDays']) {
-          DateTime date = DateTime.parse(matchDay['date']);
           List<SAMSMatchInformation> matches = [];
           for (final match in matchDay['matches']) {
             matches.add(SAMSMatchInformation(

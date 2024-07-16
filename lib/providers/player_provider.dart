@@ -10,7 +10,7 @@ class PlayerProvider {
   List<Player> players = [];
 
   void initializePlayers() {
-    final String playerJSON = localStorage.getItem(storageKey) ?? "[]";
+    final String playerJSON = localStorage.getItem(storageKey) ?? '[]';
     final List<dynamic> playerList = jsonDecode(playerJSON);
     players = playerList
         .map((player) => Player.fromJson(player))

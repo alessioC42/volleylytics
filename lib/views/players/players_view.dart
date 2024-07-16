@@ -16,7 +16,7 @@ class _PlayersViewState extends State<PlayersView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Players"),
+        title: const Text('Players'),
       ),
       body: ListView.builder(
           itemCount: globals.playerProvider.players.length,
@@ -28,12 +28,12 @@ class _PlayersViewState extends State<PlayersView> {
                     Icon(Icons.star,
                         color: Theme.of(context).colorScheme.primary),
                   Text(
-                      "${globals.playerProvider.players[index].firstName} ${globals.playerProvider.players[index].secondName}",
+                      '${globals.playerProvider.players[index].firstName} ${globals.playerProvider.players[index].secondName}',
                       style: Theme.of(context).textTheme.titleLarge)
                 ],
               ),
               subtitle: Text(
-                "Display: ${globals.playerProvider.players[index].displayName}",
+                'Display: ${globals.playerProvider.players[index].displayName}',
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               leading: Container(
@@ -45,7 +45,7 @@ class _PlayersViewState extends State<PlayersView> {
                 child: Text(
                   globals.playerProvider.players[index].position
                           ?.getIndicationLetter() ??
-                      "?",
+                      '?',
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
