@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:volleylytics/globals.dart';
 
-import '../widgets/sams_match_list_tile.dart';
+import '../../widgets/sams_match_list_tile.dart';
 
 class MatchesBrowserView extends StatefulWidget {
   const MatchesBrowserView({super.key});

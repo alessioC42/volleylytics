@@ -3,10 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:volleylytics/globals.dart';
-import 'package:volleylytics/models/player_lineup.dart';
-import 'package:volleylytics/views/matches_browser_view.dart';
+import 'package:volleylytics/views/editor/game_setup.dart';
+import 'package:volleylytics/views/sams/matches_browser_view.dart';
 import 'package:volleylytics/views/players/players_view.dart';
-import 'package:volleylytics/widgets/lineup_display.dart';
+
+import 'models/volleyball_match.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,12 +22,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'VolleyLytics',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'VolleyLytics'),
     );
   }
 }
@@ -40,15 +41,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final lineup = PlayerLineup(positions: [
-    globals.playerProvider.players[0],
-    globals.playerProvider.players[1],
-    globals.playerProvider.players[2],
-    globals.playerProvider.players[3],
-    globals.playerProvider.players[4],
-    globals.playerProvider.players[5]
-  ]);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,36 +80,44 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             },
           ),
-          ListTile(
-            title: const Text('Analytics'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text('Settings'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
         ],
       ),
-      body: Center(
-        child: LineupDisplay(
-          lineup: lineup,
-          onTap: (index) {
-            debugPrint('Tapped $index');
-          },
-        ),
+      body: ListView.builder(
+        itemCount: globals.matchProvider.matches.length,
+        itemBuilder: (context, index) {
+          final match = globals.matchProvider.matches[index];
+          return ListTile(
+            leading: SizedBox(
+              width: 50,
+              height: 50,
+              child: Image.network(match.teamThem.logoURL ?? (match.teamWe.logoURL ?? '')),
+            ),
+            title: Text('${match.teamWe.name} vs ${match.teamThem.name}'),
+            subtitle: Text(match.startTime.toString()),
+            trailing: IconButton(
+              icon: const Icon(Icons.bubble_chart),
+              onPressed: () {
+                throw UnimplementedError('Analytics dashboard not implemented yet');
+              },
+            ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            lineup.rotate();
-          });
-        },
-        tooltip: 'Add Player',
         child: const Icon(Icons.add),
+        onPressed: () async {
+          VolleyballMatch? result = await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const GameSetup(),
+            ),
+          );
+          if (result != null) {
+            setState(() {
+              globals.matchProvider.matches.add(result);
+              globals.matchProvider.saveMatches(globals.matchProvider.matches);
+            });
+          }
+        }
       ),
     );
   }

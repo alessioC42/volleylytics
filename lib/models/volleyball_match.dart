@@ -3,15 +3,16 @@ import 'package:volleylytics/models/sams_information.dart';
 import 'package:volleylytics/models/team_description.dart';
 import 'package:volleylytics/models/volleyball_score.dart';
 
-class Match {
+class VolleyballMatch {
   final SAMSMatchInformation? samsMatchInformation;
   final TeamDescription teamWe;
   final TeamDescription teamThem;
   List<VolleyballSet> sets = [];
+  final DateTime startTime;
 
-  Match({
+  VolleyballMatch({
     required this.teamWe, required this.teamThem,
-    this.samsMatchInformation,
+    this.samsMatchInformation, required this.startTime
   });
 
   VolleyballSet get latestSet {
@@ -27,14 +28,16 @@ class Match {
       'teamThem': teamThem.toJson(),
       'sets': sets.map((set) => set.toJson()).toList(),
       'samsMatchInformation': samsMatchInformation?.toJson(),
+      'startTime': startTime.toIso8601String(),
     };
   }
 
-  Match.fromJson(Map<String, dynamic> json) :
+  VolleyballMatch.fromJson(Map<String, dynamic> json) :
     teamWe = TeamDescription.fromJson(json['teamWe']),
     teamThem = TeamDescription.fromJson(json['teamThem']),
     samsMatchInformation = json['samsMatchInformation'] != null ? SAMSMatchInformation.fromJson(json['samsMatchInformation']) : null,
-    sets = (json['sets'] as List).map((set) => VolleyballSet.fromJson(set)).toList();
+    sets = (json['sets'] as List).map((set) => VolleyballSet.fromJson(set)).toList(),
+    startTime = DateTime.parse(json['startTime']);
 }
 
 class VolleyballSet {

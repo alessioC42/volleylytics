@@ -107,14 +107,18 @@ class NumberContainer extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              color: Theme.of(context).colorScheme.tertiaryContainer,
+          Badge(
+            label: Text(player.position?.getIndicationLetter()?? '?'),
+            backgroundColor: player.isCaptain ? null : Colors.blue,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                color: Theme.of(context).colorScheme.tertiaryContainer,
+              ),
+              padding: const EdgeInsets.all(6),
+              child: Text(player.number,
+                  style: Theme.of(context).textTheme.displaySmall),
             ),
-            padding: const EdgeInsets.all(6),
-            child: Text(player.number,
-                style: Theme.of(context).textTheme.displaySmall),
           ),
           Text(
             player.displayName,
