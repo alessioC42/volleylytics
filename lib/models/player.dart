@@ -1,5 +1,7 @@
 enum PlayerPosition { AUSSEN, MITTE, LIBERO, ZUSPIELER, DIAGONAL }
 
+typedef Players = List<Player>;
+
 extension PlayerPositionExtension on PlayerPosition {
   String toShortString() {
     return toString().split('.').last;
@@ -59,6 +61,15 @@ class Player {
       this.isCaptain = false});
 
   get displayName => nickname ?? secondName;
+
+  // fill up to two digits
+  String get displayNumber {
+    if (number.length == 1) {
+    return '0$number';
+    } else {
+    return number;
+    }
+  }
 
   Map<String, dynamic> toJson() {
     return {

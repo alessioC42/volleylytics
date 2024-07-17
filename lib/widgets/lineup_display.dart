@@ -9,8 +9,7 @@ class LineupDisplay extends StatelessWidget {
   final PlayerLineup lineup;
   final OnTapCallback onTap;
 
-  const LineupDisplay(
-      {super.key, required this.lineup, required this.onTap});
+  const LineupDisplay({super.key, required this.lineup, required this.onTap});
 
   final borderWidth = 4.0;
   final backgroundColor = Colors.orangeAccent;
@@ -19,7 +18,9 @@ class LineupDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     // Maximum Square board size
     Size boardSize = MediaQuery.of(context).size;
-    boardSize = Size.square(boardSize.width < boardSize.height ? boardSize.width : boardSize.height);
+    boardSize = Size.square(boardSize.width < boardSize.height
+        ? boardSize.width
+        : boardSize.height);
 
     return Container(
       height: boardSize.height,
@@ -51,17 +52,14 @@ class LineupDisplay extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Expanded(
-                    child: NumberContainer(
-                        player: lineup.positions[3],
-                        onTap: () => onTap(3))),
+                    child: PlayerDisplayContainer(
+                        player: lineup.positions[3], onTap: () => onTap(3))),
                 Expanded(
-                    child: NumberContainer(
-                        player: lineup.positions[2],
-                        onTap: () => onTap(2))),
+                    child: PlayerDisplayContainer(
+                        player: lineup.positions[2], onTap: () => onTap(2))),
                 Expanded(
-                    child: NumberContainer(
-                        player: lineup.positions[1],
-                        onTap: () => onTap(1))),
+                    child: PlayerDisplayContainer(
+                        player: lineup.positions[1], onTap: () => onTap(1))),
               ],
             ),
           ),
@@ -74,17 +72,14 @@ class LineupDisplay extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Expanded(
-                    child: NumberContainer(
-                        player: lineup.positions[4],
-                        onTap: () => onTap(4))),
+                    child: PlayerDisplayContainer(
+                        player: lineup.positions[4], onTap: () => onTap(4))),
                 Expanded(
-                    child: NumberContainer(
-                        player: lineup.positions[5],
-                        onTap: () => onTap(5))),
+                    child: PlayerDisplayContainer(
+                        player: lineup.positions[5], onTap: () => onTap(5))),
                 Expanded(
-                    child: NumberContainer(
-                        player: lineup.positions[0],
-                        onTap: () => onTap(0))),
+                    child: PlayerDisplayContainer(
+                        player: lineup.positions[0], onTap: () => onTap(0))),
               ],
             ),
           )
@@ -94,11 +89,13 @@ class LineupDisplay extends StatelessWidget {
   }
 }
 
-class NumberContainer extends StatelessWidget {
+class PlayerDisplayContainer extends StatelessWidget {
   final Player player;
   final VoidCallback onTap; // Changed to VoidCallback for better type safety
+  final bool smallFont;
 
-  const NumberContainer({super.key, required this.player, required this.onTap});
+  const PlayerDisplayContainer(
+      {super.key, required this.player, required this.onTap, this.smallFont = false});
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +105,7 @@ class NumberContainer extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Badge(
-            label: Text(player.position?.getIndicationLetter()?? '?'),
+            label: Text(player.position?.getIndicationLetter() ?? '?'),
             backgroundColor: player.isCaptain ? null : Colors.blue,
             child: Container(
               decoration: BoxDecoration(
@@ -116,17 +113,24 @@ class NumberContainer extends StatelessWidget {
                 color: Theme.of(context).colorScheme.tertiaryContainer,
               ),
               padding: const EdgeInsets.all(6),
-              child: Text(player.number,
+              child: Text(player.displayNumber,
                   style: Theme.of(context).textTheme.displaySmall),
             ),
           ),
           Text(
-            player.displayName,
-            style: Theme.of(context).textTheme.titleLarge,
+            smallFont ? limitChars(player.displayName, 7) : player.displayName,
+            style: smallFont ? Theme.of(context).textTheme.titleSmall : Theme.of(context).textTheme.titleLarge,
             overflow: TextOverflow.ellipsis,
           ),
         ],
       ),
     );
   }
+}
+
+String limitChars(String text, int limit) {
+  if (text.length <= limit) {
+    return text;
+  }
+  return '${text.substring(0, limit - 3)}…';
 }

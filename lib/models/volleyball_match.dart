@@ -1,3 +1,4 @@
+import 'package:volleylytics/models/player_lineup.dart';
 import 'package:volleylytics/models/rate_action.dart';
 import 'package:volleylytics/models/sams_information.dart';
 import 'package:volleylytics/models/team_description.dart';
@@ -20,6 +21,13 @@ class VolleyballMatch {
       sets.add(VolleyballSet(setNumber: 1));
     }
     return sets.last;
+  }
+
+  PlayerLineup? get latestLineup {
+    if (latestSet.actions.isEmpty) {
+      return null;
+    }
+    return latestSet.actions.last.lineup;
   }
 
   Map<String, dynamic> toJson() {

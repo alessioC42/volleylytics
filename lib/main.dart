@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:volleylytics/globals.dart';
+import 'package:volleylytics/views/editor/game_editor.dart';
 import 'package:volleylytics/views/editor/game_setup.dart';
 import 'package:volleylytics/views/sams/matches_browser_view.dart';
 import 'package:volleylytics/views/players/players_view.dart';
@@ -94,6 +95,21 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             title: Text('${match.teamWe.name} vs ${match.teamThem.name}'),
             subtitle: Text(match.startTime.toString()),
+            onTap: () async {
+              VolleyballMatch? overwrittenMatch = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GameEditor(match: match),
+                ),
+              );
+
+              if (overwrittenMatch != null) {
+                setState(() {
+                  globals.matchProvider.matches[index] = overwrittenMatch;
+                  globals.matchProvider.saveMatches(globals.matchProvider.matches);
+                });
+              }
+            },
             trailing: IconButton(
               icon: const Icon(Icons.bubble_chart),
               onPressed: () {

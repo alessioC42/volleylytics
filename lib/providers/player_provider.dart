@@ -27,4 +27,8 @@ class PlayerProvider {
   bool doesCaptainExist() {
     return players.any((player) => player.isCaptain);
   }
+
+  List<Player> getPlayersOfPosition(PlayerPosition? position) {
+    return players.where((player) => player.position == position).toList();
+  }
 }
