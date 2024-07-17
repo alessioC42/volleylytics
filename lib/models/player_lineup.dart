@@ -10,6 +10,11 @@ class PlayerLineup {
     positions.add(first);
   }
 
+  void rotateBack() {
+    final Player last = positions.removeLast();
+    positions.insert(0, last);
+  }
+
   bool setRotation(int lauefer) {
     if (!(positions.any(
         (player) => player.position == PlayerPosition.ZUSPIELER))) return false;
@@ -17,6 +22,10 @@ class PlayerLineup {
       rotate();
     }
     return true;
+  }
+
+  bool get liberoIn {
+    return positions.any((player) => player.position == PlayerPosition.LIBERO);
   }
 
   Map<String, dynamic> toJson() {

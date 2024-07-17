@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:volleylytics/globals.dart';
 import 'package:volleylytics/models/player_lineup.dart';
@@ -5,6 +8,7 @@ import 'package:volleylytics/models/volleyball_match.dart';
 import 'package:volleylytics/widgets/lineup_display.dart';
 
 import '../../models/player.dart';
+import '../../widgets/player_swap_selector.dart';
 
 class GameEditor extends StatefulWidget {
   final VolleyballMatch match;
@@ -19,6 +23,8 @@ class _GameEditorState extends State<GameEditor> {
   Players players = globals.playerProvider.players;
   final GlobalKey _lineupDisplayKey = GlobalKey();
   double _lineupDisplayHeight = 0;
+
+  String? numberPlayerLiberoSwaped;
 
   void initPlayerLineup() {
     playerLineup = widget.match.latestLineup;
@@ -69,12 +75,22 @@ class _GameEditorState extends State<GameEditor> {
     });
   }
 
+  void liberoSwapToBench() {
+    int benchPlayerIndex = benchPlayers.indexWhere((player) => int.tryParse(player.number) == int.tryParse(numberPlayerLiberoSwaped!));
+    Player libero = playerLineup!.positions.firstWhere((player) => player.position == PlayerPosition.LIBERO);
+    Player benchPlayer = benchPlayers.removeAt(benchPlayerIndex);
+    setState(() {
+      playerLineup!.positions[playerLineup!.positions.indexOf(libero)] = benchPlayer;
+      benchPlayers.add(libero);
+      numberPlayerLiberoSwaped = null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Match'),
-
       ),
       body: ListView(
         children: [
@@ -109,6 +125,75 @@ class _GameEditorState extends State<GameEditor> {
                 )
               ],
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.undo),
+                tooltip: 'undo Rotate',
+                onPressed: () {
+                  setState(() {
+                    playerLineup!.rotateBack();
+                  });
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.swap_horiz),
+                tooltip: 'Player swap',
+                onPressed: () {},
+              ),
+              Badge(
+                isLabelVisible: numberPlayerLiberoSwaped != null,
+                label: Text(numberPlayerLiberoSwaped ?? ''),
+                child: IconButton(
+                  icon: playerLineup!.liberoIn ? const Icon(Icons.swap_vert_circle_outlined) : const Icon(Icons.swap_vert_circle),
+                  tooltip: 'Libero swap',
+                  onPressed: () async {
+                    if (numberPlayerLiberoSwaped != null) { // swap libero out
+                      liberoSwapToBench();
+                    } else { //swap libero from bench in
+                      Players availableLiberos = benchPlayers.where((player) => player.position == PlayerPosition.LIBERO).toList();
+                      Players availableActivePlayers = [playerLineup!.positions[0], playerLineup!.positions[4], playerLineup!.positions[5]];
+
+                      List<Player>? liberoSwap = await showDialog(
+                        context: context,
+                        builder: (context) {
+                          return PlayerSwapSelector(
+                            optionsA: availableLiberos,
+                            optionsB: availableActivePlayers,
+                            title: 'Swap libero',
+                          );
+                        },
+                      );
+                      if (liberoSwap == null) return;
+                      Player libero = liberoSwap[0];
+                      Player activePlayer = liberoSwap[1];
+                      setState(() {
+                        benchPlayers.add(activePlayer);
+                        benchPlayers.remove(libero);
+                        playerLineup!.positions[playerLineup!.positions.indexOf(activePlayer)] = libero;
+                        numberPlayerLiberoSwaped = activePlayer.number;
+                        debugPrint(numberPlayerLiberoSwaped);
+                      });
+                    }
+                  },
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.redo),
+                tooltip: 'Rotate',
+                onPressed: () {
+                  setState(() {
+                    playerLineup!.rotate();
+                    if (numberPlayerLiberoSwaped != null) {
+                      int liberoIndex = playerLineup!.positions.indexWhere((player) => player.position == PlayerPosition.LIBERO);
+                      if (0<liberoIndex && liberoIndex < 4) liberoSwapToBench();
+                    }
+                  });
+                },
+              ),
+            ],
           ),
           const Divider()
         ],
