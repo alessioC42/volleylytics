@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:volleylytics/globals.dart';
 import 'package:volleylytics/models/player_lineup.dart';
@@ -75,7 +72,7 @@ class _GameEditorState extends State<GameEditor> {
     });
   }
 
-  void liberoSwapToBench() {
+  Player liberoSwapToBench() {
     int benchPlayerIndex = benchPlayers.indexWhere((player) => int.tryParse(player.number) == int.tryParse(numberPlayerLiberoSwaped!));
     Player libero = playerLineup!.positions.firstWhere((player) => player.position == PlayerPosition.LIBERO);
     Player benchPlayer = benchPlayers.removeAt(benchPlayerIndex);
@@ -84,6 +81,56 @@ class _GameEditorState extends State<GameEditor> {
       benchPlayers.add(libero);
       numberPlayerLiberoSwaped = null;
     });
+    return libero;
+  }
+
+  void swapPlayers() async {
+    Player? libero;
+    int? liberoIndex = playerLineup!.positions.indexWhere((player) => player.position == PlayerPosition.LIBERO);
+    if (numberPlayerLiberoSwaped != null) {
+      libero = liberoSwapToBench();
+    }
+
+    Players relevantBenchPlayers = benchPlayers.where((player) => player.position != PlayerPosition.LIBERO).toList();
+
+    List<Player>? swap = await showDialog(
+      context: context,
+      builder: (context) {
+        return PlayerSwapSelector(
+          optionsA: playerLineup!.positions,
+          optionsB: relevantBenchPlayers,
+          title: 'Swap players',
+        );
+      },
+    );
+    if (swap == null) return;
+
+    Player activePlayer = swap[0];
+    Player benchPlayer = swap[1];
+
+    setState(() {
+      playerLineup!.positions[playerLineup!.positions.indexOf(activePlayer)] = benchPlayer;
+      benchPlayers.add(activePlayer);
+      benchPlayers.remove(benchPlayer);
+    });
+
+    // swap libero back in if necessary
+    if (libero != null) {
+      setState(() {
+        benchPlayers.add(playerLineup!.positions[liberoIndex]);
+        numberPlayerLiberoSwaped = playerLineup!.positions[liberoIndex].number;
+        playerLineup!.positions[liberoIndex] = libero!;
+        benchPlayers.remove(libero);
+      });
+    }
+
+  }
+
+  void ensureLiberoNotAtNet() {
+    if (numberPlayerLiberoSwaped != null) {
+      int liberoIndex = playerLineup!.positions.indexWhere((player) => player.position == PlayerPosition.LIBERO);
+      if (0<liberoIndex && liberoIndex < 4) liberoSwapToBench();
+    }
   }
 
   @override
@@ -135,13 +182,14 @@ class _GameEditorState extends State<GameEditor> {
                 onPressed: () {
                   setState(() {
                     playerLineup!.rotateBack();
+                    ensureLiberoNotAtNet();
                   });
                 },
               ),
               IconButton(
                 icon: const Icon(Icons.swap_horiz),
                 tooltip: 'Player swap',
-                onPressed: () {},
+                onPressed: swapPlayers,
               ),
               Badge(
                 isLabelVisible: numberPlayerLiberoSwaped != null,
@@ -174,7 +222,6 @@ class _GameEditorState extends State<GameEditor> {
                         benchPlayers.remove(libero);
                         playerLineup!.positions[playerLineup!.positions.indexOf(activePlayer)] = libero;
                         numberPlayerLiberoSwaped = activePlayer.number;
-                        debugPrint(numberPlayerLiberoSwaped);
                       });
                     }
                   },
@@ -186,10 +233,7 @@ class _GameEditorState extends State<GameEditor> {
                 onPressed: () {
                   setState(() {
                     playerLineup!.rotate();
-                    if (numberPlayerLiberoSwaped != null) {
-                      int liberoIndex = playerLineup!.positions.indexWhere((player) => player.position == PlayerPosition.LIBERO);
-                      if (0<liberoIndex && liberoIndex < 4) liberoSwapToBench();
-                    }
+                    ensureLiberoNotAtNet();
                   });
                 },
               ),

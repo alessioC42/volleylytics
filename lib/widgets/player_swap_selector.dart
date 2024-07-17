@@ -33,21 +33,24 @@ class _PlayerSwapSelectorState extends State<PlayerSwapSelector> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: widget.optionsA.map((player) {
-                  return Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(5),
-                      color: selectedA == widget.optionsA.indexOf(player) ? Colors.amber : Colors.transparent,
-                    ),
-                    child: PlayerDisplayContainer(
-                      player: player,
-                      onTap: () {
-                        setState(() {
-                          selectedA = widget.optionsA.indexOf(player);
-                        });
-                      },
-                      smallFont: true,
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 4),
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(5),
+                        color: selectedA == widget.optionsA.indexOf(player) ? Colors.amber : Colors.transparent,
+                      ),
+                      child: PlayerDisplayContainer(
+                        player: player,
+                        onTap: () {
+                          setState(() {
+                            selectedA = widget.optionsA.indexOf(player);
+                          });
+                        },
+                        smallFont: true,
+                      ),
                     ),
                   );
                 }).toList(),
@@ -58,21 +61,24 @@ class _PlayerSwapSelectorState extends State<PlayerSwapSelector> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: widget.optionsB.map((player) {
-                  return Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(5),
-                      color: selectedB == widget.optionsB.indexOf(player) ? Colors.amber : Colors.transparent,
-                    ),
-                    child: PlayerDisplayContainer(
-                      player: player,
-                      onTap: () {
-                        setState(() {
-                          selectedB = widget.optionsB.indexOf(player);
-                        });
-                      },
-                      smallFont: true,
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 4),
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(5),
+                        color: selectedB == widget.optionsB.indexOf(player) ? Colors.amber : Colors.transparent,
+                      ),
+                      child: PlayerDisplayContainer(
+                        player: player,
+                        onTap: () {
+                          setState(() {
+                            selectedB = widget.optionsB.indexOf(player);
+                          });
+                        },
+                        smallFont: true,
+                      ),
                     ),
                   );
                 }).toList(),
