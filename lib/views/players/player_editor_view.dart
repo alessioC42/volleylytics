@@ -23,6 +23,8 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
   bool isCaptain = false;
   PlayerPosition? position;
 
+  int? initialNumber;
+
   @override
   void initState() {
     isEditMode = widget.editIndex != null;
@@ -35,6 +37,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
       nicknameController.text = player.nickname ?? '';
       isCaptain = player.isCaptain;
       position = player.position;
+      initialNumber = int.tryParse(player.number);
     }
 
     super.initState();
@@ -179,12 +182,18 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
             ),
             ElevatedButton(
               onPressed: () {
-                //validate inputs
                 if (firstNameController.text.trim() == '' ||
                     secondNameController.text.trim() == '' ||
                     numberController.text.trim() == '') {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('Please fill out all fields')));
+                  return;
+                }
+
+                if (!isEditMode && globals.playerProvider.doesPlayerWithNumberExist(numberController.text) ||
+                   (isEditMode && initialNumber != int.tryParse(numberController.text) && globals.playerProvider.doesPlayerWithNumberExist(numberController.text))) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('A player with this number already exists')));
                   return;
                 }
 
