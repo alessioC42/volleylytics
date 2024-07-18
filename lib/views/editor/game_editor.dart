@@ -5,7 +5,9 @@ import 'package:volleylytics/models/volleyball_match.dart';
 import 'package:volleylytics/widgets/lineup_display.dart';
 
 import '../../models/player.dart';
+import '../../models/volleyball_score.dart';
 import '../../widgets/player_swap_selector.dart';
+import '../../widgets/volleyball_score_editor.dart';
 
 class GameEditor extends StatefulWidget {
   final VolleyballMatch match;
@@ -20,6 +22,7 @@ class _GameEditorState extends State<GameEditor> {
   Players players = globals.playerProvider.players;
   final GlobalKey _lineupDisplayKey = GlobalKey();
   double _lineupDisplayHeight = 0;
+  VolleyballScore currentScore = VolleyballScore();
 
   String? numberPlayerLiberoSwaped;
 
@@ -123,7 +126,6 @@ class _GameEditorState extends State<GameEditor> {
         benchPlayers.remove(libero);
       });
     }
-
   }
 
   void ensureLiberoNotAtNet() {
@@ -136,11 +138,15 @@ class _GameEditorState extends State<GameEditor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Edit Match'),
-      ),
       body: ListView(
         children: [
+          ListTile(
+            leading: Image.network(widget.match.teamWe.logoURL ?? '',),
+            trailing: Image.network(widget.match.teamThem.logoURL ?? '',),
+            title: Text(widget.match.teamWe.name, overflow: TextOverflow.ellipsis),
+            subtitle: Text('vs ${widget.match.teamThem.name}', overflow: TextOverflow.ellipsis,),
+          ),
+          VolleyballScoreEditor(score: currentScore,),
           const Divider(),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,

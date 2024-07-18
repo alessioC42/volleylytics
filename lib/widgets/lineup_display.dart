@@ -18,9 +18,7 @@ class LineupDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     // Maximum Square board size
     Size boardSize = MediaQuery.of(context).size;
-    boardSize = Size.square(boardSize.width < boardSize.height
-        ? boardSize.width
-        : boardSize.height);
+    boardSize = Size(boardSize.width, boardSize.width * 0.7);
 
     return Container(
       height: boardSize.height,
@@ -33,10 +31,10 @@ class LineupDisplay extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            top: boardSize.height / 3 - borderWidth / 2,
+            top: boardSize.height * 0.4  - borderWidth / 2,
             left: 0,
             child: Container(
-              width: boardSize.height,
+              width: boardSize.width,
               height: borderWidth,
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -44,7 +42,7 @@ class LineupDisplay extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 0,
+            top: boardSize.height * 0.03,
             left: 0,
             height: boardSize.height / 3,
             width: boardSize.width,
@@ -64,7 +62,7 @@ class LineupDisplay extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: (boardSize.height / 7) * 3,
+            top: boardSize.height * 0.5,
             left: 0,
             height: boardSize.height / 3,
             width: boardSize.width,
