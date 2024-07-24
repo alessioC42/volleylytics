@@ -90,7 +90,8 @@ class _GameSetupState extends State<GameSetup> {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.pop<VolleyballMatch>(context, VolleyballMatch(
+              Navigator.pop<VolleyballMatch>(context,
+                VolleyballMatch(globals.playerProvider.players,
                 teamWe: teamWe,
                 teamThem: teamThem,
                 startTime: startTime,

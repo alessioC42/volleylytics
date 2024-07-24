@@ -103,19 +103,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 SlidableAction(
                     icon: Icons.sports_volleyball,
                     onPressed: (context) async {
-                      VolleyballMatch? overwrittenMatch = await Navigator.push(
+                      await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => GameEditor(match: match),
                         ),
                       );
 
-                      if (overwrittenMatch != null) {
-                        setState(() {
-                          globals.matchProvider.matches[index] = overwrittenMatch;
-                          globals.matchProvider.saveMatches(globals.matchProvider.matches);
-                        });
-                      }
+                    globals.matchProvider.saveMatches();
+
                     }),
                 SlidableAction(
                   icon: Icons.analytics,
@@ -134,7 +130,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Text('Are you sure you want to delete this match?'),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -177,7 +172,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     if (confirmed) {
                       setState(() {
                         globals.matchProvider.matches.removeAt(index);
-                        globals.matchProvider.saveMatches(globals.matchProvider.matches);
+                        globals.matchProvider.saveMatches();
                         initSlidableControllers();
                       });
                     }
@@ -231,7 +226,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             if (result != null) {
               setState(() {
                 globals.matchProvider.matches.add(result);
-                globals.matchProvider.saveMatches(globals.matchProvider.matches);
+                globals.matchProvider.saveMatches();
                 initSlidableControllers();
               });
             }

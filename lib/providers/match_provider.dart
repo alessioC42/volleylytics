@@ -18,8 +18,10 @@ class MatchProvider {
         .cast<VolleyballMatch>();
   }
 
-  void saveMatches(List<VolleyballMatch> newMatchesData) {
-    matches = newMatchesData;
+  void saveMatches({List<VolleyballMatch>? newMatchesData}) {
+    if (newMatchesData != null) {
+      matches = newMatchesData;
+    }
     final jsonEncoded = jsonEncode(newMatchesData);
     localStorage.setItem(storageKey, jsonEncoded);
   }

@@ -3,7 +3,7 @@ import 'package:volleylytics/models/player.dart';
 import 'package:volleylytics/models/player_lineup.dart';
 import 'package:volleylytics/models/volleyball_score.dart';
 
-enum RecordActions {
+enum RecordAction {
   /// Aufschlag
   serve,
   /// Annahme
@@ -25,7 +25,7 @@ enum RecordActions {
 /// A record of a sings event of an player
 class RateAction {
   final Player player;
-  final RecordActions action;
+  final RecordAction action;
   /// Rating from 0 to 5
   final double rating;
   final VolleyballScore score;
@@ -70,7 +70,7 @@ class RateAction {
   //fromJSON
   RateAction.fromJson(Map<String, dynamic> json) :
     player = Player.fromJson(json['player']),
-    action = RecordActions.values.firstWhere((e) => e.toString() == json['action']),
+    action = RecordAction.values.firstWhere((e) => e.toString() == json['action']),
     rating = json['rating'],
     score = VolleyballScore.fromJson(json['score']),
     time = DateTime.parse(json['time']),

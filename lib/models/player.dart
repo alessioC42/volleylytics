@@ -72,6 +72,19 @@ class Player {
     }
   }
 
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Player &&
+      other.firstName == firstName &&
+      other.secondName == secondName &&
+      other.nickname == nickname &&
+      other.number == number &&
+      other.position == position &&
+      other.isCaptain == isCaptain;
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'firstName': firstName,
@@ -95,4 +108,7 @@ class Player {
       isCaptain: json['isCaptain'] ?? false,
     );
   }
+
+  @override
+  int get hashCode => firstName.hashCode ^ secondName.hashCode ^ number.hashCode ^ position.hashCode ^ isCaptain.hashCode ^ nickname.hashCode;
 }

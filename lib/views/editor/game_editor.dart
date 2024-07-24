@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:volleylytics/globals.dart';
 import 'package:volleylytics/models/player_lineup.dart';
+import 'package:volleylytics/models/rate_action.dart';
 import 'package:volleylytics/models/volleyball_match.dart';
 import 'package:volleylytics/widgets/lineup_display.dart';
 
 import '../../models/player.dart';
-import '../../models/volleyball_score.dart';
 import '../../widgets/player_swap_selector.dart';
+import '../../widgets/rate_action_dialog.dart';
 import '../../widgets/volleyball_score_editor.dart';
 
 class GameEditor extends StatefulWidget {
@@ -18,61 +18,21 @@ class GameEditor extends StatefulWidget {
 }
 
 class _GameEditorState extends State<GameEditor> {
-  PlayerLineup? playerLineup;
-  Players players = globals.playerProvider.players;
   final GlobalKey _lineupDisplayKey = GlobalKey();
   double _lineupDisplayHeight = 0;
-  VolleyballScore currentScore = VolleyballScore();
 
-  String? numberPlayerLiberoSwaped;
-
-  void initPlayerLineup() {
-    playerLineup = widget.match.latestLineup;
-    if (playerLineup != null) return;
-    Players zuspieler =
-        globals.playerProvider.getPlayersOfPosition(PlayerPosition.ZUSPIELER);
-    Players aussen =
-        globals.playerProvider.getPlayersOfPosition(PlayerPosition.AUSSEN);
-    Players mitte =
-        globals.playerProvider.getPlayersOfPosition(PlayerPosition.MITTE);
-    Players diagonal =
-        globals.playerProvider.getPlayersOfPosition(PlayerPosition.DIAGONAL);
-    //Players libero = globals.playerProvider.getPlayersOfPosition(PlayerPosition.LIBERO);
-
-    if (zuspieler.length < 1 ||
-        aussen.length < 2 ||
-        mitte.length < 2 ||
-        diagonal.length < 1) {
-      playerLineup = PlayerLineup(positions: [
-        players[0],
-        players[1],
-        players[2],
-        players[3],
-        players[4],
-        players[5],
-      ]);
-    } else {
-      //create basic läufer 1 lineup
-      playerLineup = PlayerLineup(positions: [
-        zuspieler[0],
-        aussen[0],
-        mitte[0],
-        diagonal[0],
-        aussen[1],
-        mitte[1],
-      ]);
-    }
+  PlayerLineup get playerLineup {
+    return widget.match.currentPlayerLineup!;
   }
 
   Players get benchPlayers {
-    return players
-        .where((player) => !playerLineup!.positions.contains(player))
+    return widget.match.players
+        .where((player) => !widget.match.currentPlayerLineup!.positions.contains(player))
         .toList();
   }
 
   @override
   void initState() {
-    initPlayerLineup();
     super.initState();
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _setLineupDisplayHeight());
@@ -88,24 +48,24 @@ class _GameEditorState extends State<GameEditor> {
 
   Player liberoSwapToBench() {
     int benchPlayerIndex = benchPlayers.indexWhere((player) =>
-        int.tryParse(player.number) == int.tryParse(numberPlayerLiberoSwaped!));
-    Player libero = playerLineup!.positions
+        int.tryParse(player.number) == int.tryParse(widget.match.numberPlayerLiberoSwaped!));
+    Player libero = playerLineup.positions
         .firstWhere((player) => player.position == PlayerPosition.LIBERO);
     Player benchPlayer = benchPlayers.removeAt(benchPlayerIndex);
     setState(() {
-      playerLineup!.positions[playerLineup!.positions.indexOf(libero)] =
+      playerLineup.positions[playerLineup.positions.indexOf(libero)] =
           benchPlayer;
       benchPlayers.add(libero);
-      numberPlayerLiberoSwaped = null;
+      widget.match.numberPlayerLiberoSwaped = null;
     });
     return libero;
   }
 
   void swapPlayers() async {
     Player? libero;
-    int? liberoIndex = playerLineup!.positions
+    int? liberoIndex = playerLineup.positions
         .indexWhere((player) => player.position == PlayerPosition.LIBERO);
-    if (numberPlayerLiberoSwaped != null) {
+    if (widget.match.numberPlayerLiberoSwaped != null) {
       libero = liberoSwapToBench();
     }
 
@@ -117,7 +77,7 @@ class _GameEditorState extends State<GameEditor> {
       context: context,
       builder: (context) {
         return PlayerSwapSelector(
-          optionsA: playerLineup!.positions,
+          optionsA: playerLineup.positions,
           optionsB: relevantBenchPlayers,
           title: 'Swap players',
         );
@@ -129,7 +89,7 @@ class _GameEditorState extends State<GameEditor> {
     Player benchPlayer = swap[1];
 
     setState(() {
-      playerLineup!.positions[playerLineup!.positions.indexOf(activePlayer)] =
+      playerLineup.positions[playerLineup.positions.indexOf(activePlayer)] =
           benchPlayer;
       benchPlayers.add(activePlayer);
       benchPlayers.remove(benchPlayer);
@@ -138,67 +98,64 @@ class _GameEditorState extends State<GameEditor> {
     // swap libero back in if necessary
     if (libero != null) {
       setState(() {
-        benchPlayers.add(playerLineup!.positions[liberoIndex]);
-        numberPlayerLiberoSwaped = playerLineup!.positions[liberoIndex].number;
-        playerLineup!.positions[liberoIndex] = libero!;
+        benchPlayers.add(playerLineup.positions[liberoIndex]);
+        widget.match.numberPlayerLiberoSwaped = playerLineup.positions[liberoIndex].number;
+        playerLineup.positions[liberoIndex] = libero!;
         benchPlayers.remove(libero);
       });
     }
   }
 
   void ensureLiberoNotAtNet() {
-    if (numberPlayerLiberoSwaped != null) {
-      int liberoIndex = playerLineup!.positions
+    if (widget.match.numberPlayerLiberoSwaped != null) {
+      int liberoIndex = playerLineup.positions
           .indexWhere((player) => player.position == PlayerPosition.LIBERO);
       if (0 < liberoIndex && liberoIndex < 4) liberoSwapToBench();
     }
   }
 
-  DateTime? currentBackPressTime;
-  bool canPopNow = false;
-  int requiredSeconds = 2;
-
-  void onPopInvoked(bool didPop) {
-    DateTime now = DateTime.now();
-    if (currentBackPressTime == null ||
-        now.difference(currentBackPressTime!) >
-            Duration(seconds: requiredSeconds)) {
-      currentBackPressTime = now;
-      final message = ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Press back again to exit'),
-          duration: Duration(seconds: 1),
-        ),
-      );
-      Future.delayed(
-        Duration(seconds: requiredSeconds),
-        () {
-          if (mounted) {
-            setState(() {
-              canPopNow = false;
-            });
-            message.close();
-          }
-        },
-      );
-      setState(() {
-        canPopNow = true;
-      });
-    }
+  void onPlayerTapped(Player player) async {
+    debugPrint('Player tapped: ${player.displayName}');
+    RateAction? rateAction = await showDialog(
+      context: context,
+      builder: (context) {
+        return RateActionDialog(
+          player: player,
+          score: widget.match.currentScore!,
+          lineup: playerLineup,
+        );
+      },
+    );
+    rateAction;
   }
 
-  @override
-  void dispose() {
-    currentBackPressTime = null;
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PopScope(
-        canPop: canPopNow,
-        onPopInvoked: onPopInvoked,
+        canPop: false,
+        onPopInvoked: (bool didPop) async {
+          if (didPop) {
+            return;
+          }
+          final NavigatorState navigator = Navigator.of(context);
+          final bool? shouldPop = await _showBackDialog(context, () {
+            final match = VolleyballMatch(widget.match.players,
+              teamWe: widget.match.teamWe,
+              teamThem: widget.match.teamThem,
+              startTime: widget.match.startTime,
+              sets: widget.match.sets,
+              samsMatchInformation: widget.match.samsMatchInformation,
+              currentPlayerLineup: playerLineup,
+            );
+
+            return match;
+          });
+          if (shouldPop ?? false) {
+            navigator.pop();
+          }
+        },
         child: Scaffold(
           body: ListView(
             children: [
@@ -217,7 +174,7 @@ class _GameEditorState extends State<GameEditor> {
                 ),
               ),
               VolleyballScoreEditor(
-                score: currentScore,
+                score: widget.match.currentScore!,
               ),
               const Divider(),
               SingleChildScrollView(
@@ -226,8 +183,10 @@ class _GameEditorState extends State<GameEditor> {
                   children: [
                     LineupDisplay(
                       key: _lineupDisplayKey,
-                      lineup: playerLineup!,
-                      onTap: (i) {},
+                      lineup: playerLineup,
+                      onTap: (i) {
+                        onPlayerTapped(playerLineup.positions[i]);
+                      },
                     ),
                     SizedBox(
                       height: _lineupDisplayHeight,
@@ -241,7 +200,9 @@ class _GameEditorState extends State<GameEditor> {
                             children: benchPlayers.map((player) {
                               return PlayerDisplayContainer(
                                 player: player,
-                                onTap: () {},
+                                onTap: () {
+                                  onPlayerTapped(player);
+                                },
                                 smallFont: true,
                               );
                             }).toList(),
@@ -258,7 +219,7 @@ class _GameEditorState extends State<GameEditor> {
                     tooltip: 'undo Rotate',
                     onPressed: () {
                       setState(() {
-                        playerLineup!.rotateBack();
+                        playerLineup.rotateBack();
                         ensureLiberoNotAtNet();
                       });
                     },
@@ -269,15 +230,15 @@ class _GameEditorState extends State<GameEditor> {
                     onPressed: swapPlayers,
                   ),
                   Badge(
-                    isLabelVisible: numberPlayerLiberoSwaped != null,
-                    label: Text(numberPlayerLiberoSwaped ?? ''),
+                    isLabelVisible: widget.match.numberPlayerLiberoSwaped != null,
+                    label: Text(widget.match.numberPlayerLiberoSwaped ?? ''),
                     child: IconButton(
-                      icon: playerLineup!.liberoIn
+                      icon: playerLineup.liberoIn
                           ? const Icon(Icons.swap_vert_circle_outlined)
                           : const Icon(Icons.swap_vert_circle),
                       tooltip: 'Libero swap',
                       onPressed: () async {
-                        if (numberPlayerLiberoSwaped != null) {
+                        if (widget.match.numberPlayerLiberoSwaped != null) {
                           // swap libero out
                           liberoSwapToBench();
                         } else {
@@ -287,9 +248,9 @@ class _GameEditorState extends State<GameEditor> {
                                   player.position == PlayerPosition.LIBERO)
                               .toList();
                           Players availableActivePlayers = [
-                            playerLineup!.positions[0],
-                            playerLineup!.positions[4],
-                            playerLineup!.positions[5]
+                            playerLineup.positions[0],
+                            playerLineup.positions[4],
+                            playerLineup.positions[5]
                           ];
 
                           List<Player>? liberoSwap = await showDialog(
@@ -308,9 +269,9 @@ class _GameEditorState extends State<GameEditor> {
                           setState(() {
                             benchPlayers.add(activePlayer);
                             benchPlayers.remove(libero);
-                            playerLineup!.positions[playerLineup!.positions
+                            playerLineup.positions[playerLineup.positions
                                 .indexOf(activePlayer)] = libero;
-                            numberPlayerLiberoSwaped = activePlayer.number;
+                            widget.match.numberPlayerLiberoSwaped = activePlayer.number;
                           });
                         }
                       },
@@ -321,7 +282,7 @@ class _GameEditorState extends State<GameEditor> {
                     tooltip: 'Rotate',
                     onPressed: () {
                       setState(() {
-                        playerLineup!.rotate();
+                        playerLineup.rotate();
                         ensureLiberoNotAtNet();
                       });
                     },
@@ -335,4 +296,32 @@ class _GameEditorState extends State<GameEditor> {
       ),
     );
   }
+}
+
+typedef CreateMatchData = VolleyballMatch Function();
+
+Future<bool?> _showBackDialog(BuildContext context, CreateMatchData createMatchData) {
+  return showDialog<bool>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Do you want to leave the game?'),
+        content: const Text('All changes will be saved.'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            child: const Text('Leave'),
+          ),
+        ],
+      );
+    },
+  );
 }
