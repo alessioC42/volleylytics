@@ -108,11 +108,11 @@ class PlayerDisplayContainer extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
-                color: Theme.of(context).colorScheme.tertiaryContainer,
+                color: player.isLibero ? Colors.deepOrange : Theme.of(context).colorScheme.tertiaryContainer,
               ),
               padding: const EdgeInsets.all(6),
               child: Text(player.displayNumber,
-                  style: Theme.of(context).textTheme.displaySmall),
+                  style: Theme.of(context).textTheme.displaySmall, ),
             ),
           ),
           Text(

@@ -60,7 +60,8 @@ class Player {
       this.nickname,
       this.isCaptain = false});
 
-  get displayName => nickname ?? secondName;
+  String get displayName => nickname ?? secondName;
+  bool get isLibero => position == PlayerPosition.LIBERO;
 
   // fill up to two digits
   String get displayNumber {
