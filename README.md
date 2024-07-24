@@ -7,8 +7,9 @@ Monitor players in game, track their actions and find common mistakes. Basically
 ### Roadmap
 
 - [x] Player management
-- [ ] Game management
+- [x] Game management
 - [ ] Game editor
 - [ ] Export/Import games/team data
+- [ ] Analytics and statistics dashboard
 - [ ] SAMS integration for game tracking and game discovery (partially already implemented)
 - [ ] Welcome and setup screen

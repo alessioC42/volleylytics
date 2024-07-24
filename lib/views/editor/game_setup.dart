@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:volleylytics/models/team_description.dart';
 
+import '../../globals.dart';
 import '../../models/volleyball_match.dart';
 import '../../widgets/club_icon_selector.dart';
 
@@ -58,7 +59,7 @@ class _GameSetupState extends State<GameSetup> {
           ),
           ListTile(
             title: const Text('Start Time'),
-            subtitle: Text(startTime.toString()),
+            subtitle: Text(globals.dateFormatter.format(startTime)),
             trailing: IconButton(
               icon: const Icon(Icons.calendar_today),
               onPressed: () async {
@@ -68,22 +69,22 @@ class _GameSetupState extends State<GameSetup> {
                   firstDate: DateTime.now().subtract(const Duration(days: 365*5)),
                   lastDate: DateTime.now().add(const Duration(days: 365)),
                 );
+                if (newStartTime == null) return;
                 final TimeOfDay? newTimeOfDay = await showTimePicker(
                   context: context,
                   initialTime: TimeOfDay.fromDateTime(startTime),
                 );
+                if (newTimeOfDay == null) return;
+                setState(() {
+                  startTime = DateTime(
+                    newStartTime.year,
+                    newStartTime.month,
+                    newStartTime.day,
+                    newTimeOfDay.hour,
+                    newTimeOfDay.minute,
+                  );
+                });
 
-                if (newStartTime != null && newTimeOfDay != null) {
-                  setState(() {
-                    startTime = DateTime(
-                      newStartTime.year,
-                      newStartTime.month,
-                      newStartTime.day,
-                      newTimeOfDay.hour,
-                      newTimeOfDay.minute,
-                    );
-                  });
-                }
               },
             ),
           ),

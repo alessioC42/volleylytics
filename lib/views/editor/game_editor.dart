@@ -173,7 +173,6 @@ class _GameEditorState extends State<GameEditor> {
       Future.delayed(
         Duration(seconds: requiredSeconds),
         () {
-          // check if widget is still mounted
           if (mounted) {
             setState(() {
               canPopNow = false;

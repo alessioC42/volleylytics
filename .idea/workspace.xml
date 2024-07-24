@@ -4,17 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="data models for match recording">
-      <change afterPath="$PROJECT_DIR$/lib/providers/match_provider.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/views/editor/game_setup.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/club_icon_selector.dart" afterDir="false" />
+    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="feat: double Back to close a game">
+      <change afterPath="$PROJECT_DIR$/lib/home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/globals.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/globals.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/match.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/volleyball_match.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/team_description.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/team_description.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/matches_browser_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/sams/matches_browser_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/lineup_display.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/lineup_display.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/editor/game_editor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/editor/game_editor.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/editor/game_setup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/editor/game_setup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,25 +43,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Flutter.main.dart.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "io.flutter.reload.alreadyRun": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/alessio/flutter/bin/cache/dart-sdk",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "dart.settings",
-    "show.migrate.to.gradle.popup": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Flutter.main.dart.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/alessio/flutter/bin/cache/dart-sdk&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;dart.settings&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib/views/sams" />
@@ -106,6 +105,12 @@
       <workItem from="1721046940166" duration="643000" />
       <workItem from="1721116126884" duration="2297000" />
       <workItem from="1721127336931" duration="10839000" />
+      <workItem from="1721206569279" duration="5859000" />
+      <workItem from="1721218942494" duration="11503000" />
+      <workItem from="1721292072587" duration="7318000" />
+      <workItem from="1721470436757" duration="1813000" />
+      <workItem from="1721818524094" duration="1509000" />
+      <workItem from="1721834017680" duration="3414000" />
     </task>
     <task id="LOCAL-00001" summary="flutter create">
       <option name="closed" value="true" />
@@ -187,7 +192,55 @@
       <option name="project" value="LOCAL" />
       <updated>1721130697204</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="wip: rendering board and creating start positions">
+      <option name="closed" value="true" />
+      <created>1721212415917</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1721212415917</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Do not allow creation of multiple players with same number">
+      <option name="closed" value="true" />
+      <created>1721219806092</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1721219806092</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Libero swap logic">
+      <option name="closed" value="true" />
+      <created>1721226038844</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1721226038844</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Player swap logic working">
+      <option name="closed" value="true" />
+      <created>1721229863148</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1721229863148</updated>
+    </task>
+    <task id="LOCAL-00015" summary="score display/editor implemented and working">
+      <option name="closed" value="true" />
+      <created>1721298932255</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1721298932255</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: double Back to close a game">
+      <option name="closed" value="true" />
+      <created>1721471819166</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1721471819166</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,7 +268,13 @@
     <MESSAGE value="wip: volleyball field" />
     <MESSAGE value="dart format" />
     <MESSAGE value="data models for match recording" />
-    <option name="LAST_COMMIT_MESSAGE" value="data models for match recording" />
+    <MESSAGE value="wip: rendering board and creating start positions" />
+    <MESSAGE value="Do not allow creation of multiple players with same number" />
+    <MESSAGE value="Libero swap logic" />
+    <MESSAGE value="Player swap logic working" />
+    <MESSAGE value="score display/editor implemented and working" />
+    <MESSAGE value="feat: double Back to close a game" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: double Back to close a game" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
