@@ -1,39 +1,28 @@
 import 'package:volleylytics/models/player.dart';
 
 class PlayerLineup {
-  late List<Player> positions;
+  late List<PlayerNumber> positions;
 
   PlayerLineup({required this.positions});
 
   void rotate() {
-    final Player first = positions.removeAt(0);
+    final PlayerNumber first = positions.removeAt(0);
     positions.add(first);
   }
 
   void rotateBack() {
-    final Player last = positions.removeLast();
+    final PlayerNumber last = positions.removeLast();
     positions.insert(0, last);
   }
 
-  bool setRotation(int lauefer) {
-    if (!(positions.any(
-        (player) => player.position == PlayerPosition.ZUSPIELER))) return false;
-    while (!(positions[lauefer].position == PlayerPosition.ZUSPIELER)) {
-      rotate();
-    }
-    return true;
+  bool liberoIn(List<Player> players) {
+    return positions.any((position) => players.any((player) => player.number == position && player.position == PlayerPosition.LIBERO));
   }
 
-  bool get liberoIn {
-    return positions.any((player) => player.position == PlayerPosition.LIBERO);
+  List<int> toJson() {
+    return positions;
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'positions': positions.map((player) => player.toJson()).toList(),
-    };
-  }
-
-  PlayerLineup.fromJson(Map<String, dynamic> json) :
-    positions = json['positions'].map<Player>((player) => Player.fromJson(player)).toList();
+  PlayerLineup.fromJson(List<int> json) :
+    positions = json;
 }

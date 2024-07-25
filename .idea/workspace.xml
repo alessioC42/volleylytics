@@ -9,18 +9,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="WIP: rate_action_dialog.dart">
-      <change afterPath="$PROJECT_DIR$/icon.kitchen.url" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="update app icon">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/volleylytics_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/volleylytics_android.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/player.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/player_lineup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/player_lineup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/rate_action.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/rate_action.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/volleyball_match.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/volleyball_match.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/volleyball_score.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/volleyball_score.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/providers/match_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/providers/match_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/providers/player_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/providers/player_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/editor/game_editor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/editor/game_editor.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/players/player_editor_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/players/player_editor_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/players/players_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/players/players_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/lineup_display.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/lineup_display.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/player_swap_selector.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/player_swap_selector.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/rate_action_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/rate_action_dialog.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +124,7 @@
       <workItem from="1721845791120" duration="9409000" />
       <workItem from="1721892462919" duration="138000" />
       <workItem from="1721892612605" duration="405000" />
-      <workItem from="1721915843856" duration="1581000" />
+      <workItem from="1721915843856" duration="7369000" />
     </task>
     <task id="LOCAL-00001" summary="flutter create">
       <option name="closed" value="true" />
@@ -283,7 +286,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721855192868</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="update app icon">
+      <option name="closed" value="true" />
+      <created>1721917563849</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1721917563849</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,7 +332,8 @@
     <MESSAGE value="libero color is now different on board" />
     <MESSAGE value="save entire editor state in VolleyballMatch class as controller like object" />
     <MESSAGE value="WIP: rate_action_dialog.dart" />
-    <option name="LAST_COMMIT_MESSAGE" value="WIP: rate_action_dialog.dart" />
+    <MESSAGE value="update app icon" />
+    <option name="LAST_COMMIT_MESSAGE" value="update app icon" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

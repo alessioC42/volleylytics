@@ -55,7 +55,7 @@ class _PlayersViewState extends State<PlayersView> {
                   color: Theme.of(context).colorScheme.secondaryContainer,
                 ),
                 padding: const EdgeInsets.all(8),
-                child: Text(globals.playerProvider.players[index].number,
+                child: Text(globals.playerProvider.players[index].displayNumber,
                     style: Theme.of(context).textTheme.displaySmall),
               ),
               onTap: () async {

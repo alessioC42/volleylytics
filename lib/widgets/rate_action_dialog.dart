@@ -3,8 +3,10 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:volleylytics/models/player_lineup.dart';
 import 'package:volleylytics/models/volleyball_score.dart';
+import 'package:volleylytics/widgets/lineup_display.dart';
 
 import '../models/player.dart';
+import '../models/rate_action.dart';
 
 class RateActionDialog extends StatefulWidget {
   const RateActionDialog(
@@ -23,6 +25,7 @@ class RateActionDialog extends StatefulWidget {
 
 class _RateActionDialogState extends State<RateActionDialog> {
   double rating = 2.5;
+  RecordAction selectedAction = RecordAction.values.first;
 
   static Color getRatingColor(double rating) {
     double x = rating / 5 * 510;
@@ -37,18 +40,44 @@ class _RateActionDialogState extends State<RateActionDialog> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const SizedBox(height: 20),
-          const Text('Rate Action'),
-          const SizedBox(height: 40),
+          const SizedBox(height: 30),
+          PlayerDisplayContainer(player: widget.player, onTap: () {}),
           Expanded(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Expanded(
-                  child: Row(),//todo selector
-                ),
+                const SizedBox(width: 30,),
                 Expanded(
-                  child: SfSliderTheme(
+                  child: SingleChildScrollView(
+
+                    child: Column(
+                      children: RecordAction.values
+                          .map((action) => InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedAction = action;
+                          });
+                        },
+                          child: Row(
+                            children: [
+                              Radio<RecordAction>(
+                                value: action,
+                                groupValue: selectedAction,
+                                onChanged: (RecordAction? value) {
+                                  setState(() {
+                                    selectedAction = value!;
+                                  });
+                                },
+                              ),
+                              Icon(action.icon),
+                              Text(' ${action.toString().split('.').last}', style: Theme.of(context).textTheme.headlineMedium,),
+                            ],
+                          ),
+                      ))
+                          .toList(),
+                    ),
+                  ),
+                ),
+                SfSliderTheme(
                     data: SfSliderThemeData(
                       activeTrackColor: Colors.blue,
                       activeTrackHeight: 10,
@@ -74,14 +103,24 @@ class _RateActionDialogState extends State<RateActionDialog> {
                       },
                     ),
                   ),
-                ),
+                const SizedBox(width: 30,)
               ],
             ),
           ),
           FilledButton(
-            onPressed: () {},
+            onPressed: () {
+              final RateAction rateAction = RateAction(
+                player: widget.player.number,
+                action: selectedAction,
+                rating: rating,
+                score: widget.score,
+                lineup: widget.lineup,
+              );
+              Navigator.of(context).pop(rateAction);
+            },
             child: const Text('Submit'),
-          )
+          ),
+          const SizedBox(height: 30),
         ],
       ),
     );

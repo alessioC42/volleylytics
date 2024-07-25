@@ -1,6 +1,7 @@
 enum PlayerPosition { AUSSEN, MITTE, LIBERO, ZUSPIELER, DIAGONAL }
 
 typedef Players = List<Player>;
+typedef PlayerNumber = int;
 
 extension PlayerPositionExtension on PlayerPosition {
   String toShortString() {
@@ -48,7 +49,7 @@ class Player {
   String firstName;
   String secondName;
   String? nickname;
-  String number;
+  PlayerNumber number;
   PlayerPosition? position;
   bool isCaptain;
 
@@ -65,10 +66,10 @@ class Player {
 
   // fill up to two digits
   String get displayNumber {
-    if (number.length == 1) {
+    if (number.toString().length == 1) {
     return '0$number';
     } else {
-    return number;
+    return number.toString();
     }
   }
 

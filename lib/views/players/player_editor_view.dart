@@ -33,11 +33,11 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
       final player = globals.playerProvider.players[widget.editIndex!];
       firstNameController.text = player.firstName;
       secondNameController.text = player.secondName;
-      numberController.text = player.number;
+      numberController.text = player.number.toString();
       nicknameController.text = player.nickname ?? '';
       isCaptain = player.isCaptain;
       position = player.position;
-      initialNumber = int.tryParse(player.number);
+      initialNumber = player.number;
     }
 
     super.initState();
@@ -190,8 +190,8 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                   return;
                 }
 
-                if (!isEditMode && globals.playerProvider.doesPlayerWithNumberExist(numberController.text) ||
-                   (isEditMode && initialNumber != int.tryParse(numberController.text) && globals.playerProvider.doesPlayerWithNumberExist(numberController.text))) {
+                if (!isEditMode && globals.playerProvider.doesPlayerWithNumberExist(int.tryParse(numberController.text)) ||
+                   (isEditMode && initialNumber != int.tryParse(numberController.text) && globals.playerProvider.doesPlayerWithNumberExist(int.tryParse(numberController.text)))) {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('A player with this number already exists')));
                   return;
@@ -200,7 +200,7 @@ class _PlayerEditorViewState extends State<PlayerEditorView> {
                 final newPlayer = Player(
                   firstName: firstNameController.text.trim(),
                   secondName: secondNameController.text.trim(),
-                  number: numberController.text,
+                  number: int.parse(numberController.text),
                   nickname: nicknameController.text.trim() == ''
                       ? null
                       : nicknameController.text.trim(),

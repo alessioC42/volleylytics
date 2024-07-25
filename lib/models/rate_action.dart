@@ -6,26 +6,57 @@ import 'package:volleylytics/models/volleyball_score.dart';
 enum RecordAction {
   /// Aufschlag
   serve,
+
   /// Annahme
   receive,
+
   /// Angriff
   set,
+
   /// Angriff
   attack,
+
   /// Block
   block,
+
   /// Bagger
   dig,
+
   /// Zuspiel
   assist,
+
   /// Fehler
   error,
 }
 
+extension RecordActionIcon on RecordAction {
+  IconData get icon {
+    switch (this) {
+      case RecordAction.serve:
+        return Icons.sports_volleyball;
+      case RecordAction.receive:
+        return Icons.sports_volleyball;
+      case RecordAction.set:
+        return Icons.sports_volleyball;
+      case RecordAction.attack:
+        return Icons.sports_volleyball;
+      case RecordAction.block:
+        return Icons.sports_volleyball;
+      case RecordAction.dig:
+        return Icons.sports_volleyball;
+      case RecordAction.assist:
+        return Icons.sports_volleyball;
+      case RecordAction.error:
+        return Icons.sports_volleyball;
+    }
+  }
+}
+
 /// A record of a sings event of an player
 class RateAction {
-  final Player player;
+  final PlayerNumber player;
   final RecordAction action;
+
   /// Rating from 0 to 5
   final double rating;
   final VolleyballScore score;
@@ -58,7 +89,7 @@ class RateAction {
   //toJSON
   Map<String, dynamic> toJson() {
     return {
-      'player': player.toJson(),
+      'player': player,
       'action': action.toString(),
       'rating': rating,
       'score': score.toJson(),
@@ -68,11 +99,12 @@ class RateAction {
   }
 
   //fromJSON
-  RateAction.fromJson(Map<String, dynamic> json) :
-    player = Player.fromJson(json['player']),
-    action = RecordAction.values.firstWhere((e) => e.toString() == json['action']),
-    rating = json['rating'],
-    score = VolleyballScore.fromJson(json['score']),
-    time = DateTime.parse(json['time']),
-    lineup = PlayerLineup.fromJson(json['lineup']);
+  RateAction.fromJson(Map<String, dynamic> json)
+      : player = json['player'],
+        action = RecordAction.values
+            .firstWhere((e) => e.toString() == json['action']),
+        rating = json['rating'],
+        score = VolleyballScore.fromJson(json['score']),
+        time = DateTime.parse(json['time']),
+        lineup = PlayerLineup.fromJson(json['lineup']);
 }

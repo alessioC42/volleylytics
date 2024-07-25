@@ -25,10 +25,18 @@ class _GameEditorState extends State<GameEditor> {
     return widget.match.currentPlayerLineup!;
   }
 
-  Players get benchPlayers {
-    return widget.match.players
-        .where((player) => !widget.match.currentPlayerLineup!.positions.contains(player))
-        .toList();
+  Player getPlayer(PlayerNumber number) {
+    return widget.match.getPlayer(number);
+  }
+
+  List<PlayerNumber> get benchPlayers {
+    List<PlayerNumber> result = [];
+    for (Player player in widget.match.players) {
+      if (!playerLineup.positions.contains(player.number)) {
+        result.add(player.number);
+      }
+    }
+    return result;
   }
 
   @override
@@ -46,12 +54,12 @@ class _GameEditorState extends State<GameEditor> {
     });
   }
 
-  Player liberoSwapToBench() {
-    int benchPlayerIndex = benchPlayers.indexWhere((player) =>
-        int.tryParse(player.number) == int.tryParse(widget.match.numberPlayerLiberoSwaped!));
-    Player libero = playerLineup.positions
-        .firstWhere((player) => player.position == PlayerPosition.LIBERO);
-    Player benchPlayer = benchPlayers.removeAt(benchPlayerIndex);
+  PlayerNumber liberoSwapToBench() {
+    int benchPlayerIndex = benchPlayers.indexWhere((playerNumber) =>
+    playerNumber == widget.match.numberPlayerLiberoSwaped);
+    PlayerNumber libero = playerLineup.positions
+        .firstWhere((player) => widget.match.getPlayer(player).position == PlayerPosition.LIBERO);
+    PlayerNumber benchPlayer = benchPlayers.removeAt(benchPlayerIndex);
     setState(() {
       playerLineup.positions[playerLineup.positions.indexOf(libero)] =
           benchPlayer;
@@ -62,31 +70,32 @@ class _GameEditorState extends State<GameEditor> {
   }
 
   void swapPlayers() async {
-    Player? libero;
+    PlayerNumber? libero;
     int? liberoIndex = playerLineup.positions
-        .indexWhere((player) => player.position == PlayerPosition.LIBERO);
+        .indexWhere((playerNumber) => getPlayer(playerNumber).position == PlayerPosition.LIBERO);
     if (widget.match.numberPlayerLiberoSwaped != null) {
       libero = liberoSwapToBench();
     }
 
-    Players relevantBenchPlayers = benchPlayers
-        .where((player) => player.position != PlayerPosition.LIBERO)
+    List<PlayerNumber> relevantBenchPlayers = benchPlayers
+        .where((player) => getPlayer(player).position != PlayerPosition.LIBERO)
         .toList();
 
-    List<Player>? swap = await showDialog(
+    List<PlayerNumber>? swap = await showDialog(
       context: context,
       builder: (context) {
         return PlayerSwapSelector(
           optionsA: playerLineup.positions,
           optionsB: relevantBenchPlayers,
+          getPlayer: getPlayer,
           title: 'Swap players',
         );
       },
     );
     if (swap == null) return;
 
-    Player activePlayer = swap[0];
-    Player benchPlayer = swap[1];
+    PlayerNumber activePlayer = swap[0];
+    PlayerNumber benchPlayer = swap[1];
 
     setState(() {
       playerLineup.positions[playerLineup.positions.indexOf(activePlayer)] =
@@ -99,7 +108,7 @@ class _GameEditorState extends State<GameEditor> {
     if (libero != null) {
       setState(() {
         benchPlayers.add(playerLineup.positions[liberoIndex]);
-        widget.match.numberPlayerLiberoSwaped = playerLineup.positions[liberoIndex].number;
+        widget.match.numberPlayerLiberoSwaped = playerLineup.positions[liberoIndex];
         playerLineup.positions[liberoIndex] = libero!;
         benchPlayers.remove(libero);
       });
@@ -109,7 +118,7 @@ class _GameEditorState extends State<GameEditor> {
   void ensureLiberoNotAtNet() {
     if (widget.match.numberPlayerLiberoSwaped != null) {
       int liberoIndex = playerLineup.positions
-          .indexWhere((player) => player.position == PlayerPosition.LIBERO);
+          .indexWhere((player) => getPlayer(player).position == PlayerPosition.LIBERO);
       if (0 < liberoIndex && liberoIndex < 4) liberoSwapToBench();
     }
   }
@@ -126,7 +135,7 @@ class _GameEditorState extends State<GameEditor> {
         );
       },
     );
-    rateAction;
+    debugPrint(rateAction?.toJson().toString());
   }
 
 
@@ -185,8 +194,9 @@ class _GameEditorState extends State<GameEditor> {
                       key: _lineupDisplayKey,
                       lineup: playerLineup,
                       onTap: (i) {
-                        onPlayerTapped(playerLineup.positions[i]);
+                        onPlayerTapped(getPlayer(playerLineup.positions[i]));
                       },
+                      getPlayer: getPlayer,
                     ),
                     SizedBox(
                       height: _lineupDisplayHeight,
@@ -199,9 +209,9 @@ class _GameEditorState extends State<GameEditor> {
                             alignment: WrapAlignment.start,
                             children: benchPlayers.map((player) {
                               return PlayerDisplayContainer(
-                                player: player,
+                                player: getPlayer(player),
                                 onTap: () {
-                                  onPlayerTapped(player);
+                                  onPlayerTapped(getPlayer(player));
                                 },
                                 smallFont: true,
                               );
@@ -231,9 +241,9 @@ class _GameEditorState extends State<GameEditor> {
                   ),
                   Badge(
                     isLabelVisible: widget.match.numberPlayerLiberoSwaped != null,
-                    label: Text(widget.match.numberPlayerLiberoSwaped ?? ''),
+                    label: Text(widget.match.numberPlayerLiberoSwaped?.toString() ?? ''),
                     child: IconButton(
-                      icon: playerLineup.liberoIn
+                      icon: playerLineup.liberoIn(widget.match.players)
                           ? const Icon(Icons.swap_vert_circle_outlined)
                           : const Icon(Icons.swap_vert_circle),
                       tooltip: 'Libero swap',
@@ -243,35 +253,36 @@ class _GameEditorState extends State<GameEditor> {
                           liberoSwapToBench();
                         } else {
                           //swap libero from bench in
-                          Players availableLiberos = benchPlayers
+                          List<PlayerNumber> availableLiberos = benchPlayers
                               .where((player) =>
-                                  player.position == PlayerPosition.LIBERO)
+                                  getPlayer(player).position == PlayerPosition.LIBERO)
                               .toList();
-                          Players availableActivePlayers = [
+                          List<PlayerNumber> availableActivePlayers = [
                             playerLineup.positions[0],
                             playerLineup.positions[4],
                             playerLineup.positions[5]
                           ];
 
-                          List<Player>? liberoSwap = await showDialog(
+                          List<PlayerNumber>? liberoSwap = await showDialog(
                             context: context,
                             builder: (context) {
                               return PlayerSwapSelector(
                                 optionsA: availableLiberos,
                                 optionsB: availableActivePlayers,
                                 title: 'Swap libero',
+                                getPlayer: getPlayer,
                               );
                             },
                           );
                           if (liberoSwap == null) return;
-                          Player libero = liberoSwap[0];
-                          Player activePlayer = liberoSwap[1];
+                          PlayerNumber libero = liberoSwap[0];
+                          PlayerNumber activePlayer = liberoSwap[1];
                           setState(() {
                             benchPlayers.add(activePlayer);
                             benchPlayers.remove(libero);
                             playerLineup.positions[playerLineup.positions
                                 .indexOf(activePlayer)] = libero;
-                            widget.match.numberPlayerLiberoSwaped = activePlayer.number;
+                            widget.match.numberPlayerLiberoSwaped = activePlayer;
                           });
                         }
                       },

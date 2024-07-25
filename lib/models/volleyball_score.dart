@@ -89,20 +89,14 @@ class VolleyballScore {
     return false;
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'scoreWe': scoreWe,
-      'scoreThem': scoreThem,
-      'setNumber': setNumber,
-      'setScoreWe': setScorewe,
-      'setScoreThem': setScoreThem,
-    };
+  List<int> toJson() {
+    return [scoreWe, scoreThem, setNumber, setScorewe, setScoreThem];
   }
 
-  VolleyballScore.fromJson(Map<String, dynamic> json) :
-    scoreWe = json['scoreWe'],
-    scoreThem = json['scoreThem'],
-    setNumber = json['setNumber'],
-    setScorewe = json['setScoreWe'],
-    setScoreThem = json['setScoreThem'];
+  VolleyballScore.fromJson(List<int> json) :
+    scoreWe = json[0],
+    scoreThem = json[1],
+    setNumber = json[2],
+    setScorewe = json[3],
+    setScoreThem = json[4];
 }

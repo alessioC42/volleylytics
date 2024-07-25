@@ -15,7 +15,7 @@ class VolleyballMatch {
   final List<Player> players;
   PlayerLineup? currentPlayerLineup;
   VolleyballScore? currentScore;
-  String? numberPlayerLiberoSwaped;
+  int? numberPlayerLiberoSwaped;
 
 
   VolleyballMatch(this.players, {
@@ -52,24 +52,28 @@ class VolleyballMatch {
         mitte.length < 2 ||
         diagonal.length < 1) {
       return PlayerLineup(positions: [
-        playersNoLibero[0],
-        playersNoLibero[1],
-        playersNoLibero[2],
-        playersNoLibero[3],
-        playersNoLibero[4],
-        playersNoLibero[5],
+        playersNoLibero[0].number,
+        playersNoLibero[1].number,
+        playersNoLibero[2].number,
+        playersNoLibero[3].number,
+        playersNoLibero[4].number,
+        playersNoLibero[5].number,
       ]);
     } else {
       //create basic läufer 1 lineup
       return PlayerLineup(positions: [
-        zuspieler[0],
-        aussen[0],
-        mitte[0],
-        diagonal[0],
-        aussen[1],
-        mitte[1],
+        zuspieler[0].number,
+        aussen[0].number,
+        mitte[0].number,
+        diagonal[0].number,
+        aussen[1].number,
+        mitte[1].number,
       ]);
     }
+  }
+
+  Player getPlayer(PlayerNumber number) {
+    return players.firstWhere((player) => player.number == number);
   }
 
   VolleyballSet get latestSet {

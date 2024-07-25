@@ -11,7 +11,8 @@ class MatchProvider {
 
   void initializeMatches() {
     final String matchesJSON = localStorage.getItem(storageKey) ?? '[]';
-    final List<dynamic> matchesList = jsonDecode(matchesJSON);
+    final List<dynamic>? matchesList = jsonDecode(matchesJSON);
+    if (matchesList == null) return;
     matches = matchesList
         .map((player) => VolleyballMatch.fromJson(player))
         .toList()

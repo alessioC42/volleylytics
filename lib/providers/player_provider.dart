@@ -28,8 +28,8 @@ class PlayerProvider {
     return players.any((player) => player.isCaptain);
   }
 
-  bool doesPlayerWithNumberExist(String number) {
-    return players.any((player) => int.tryParse(player.number) == int.tryParse(number));
+  bool doesPlayerWithNumberExist(int? number) {
+    return players.any((player) => player.number == number);
   }
 
   List<Player> getPlayersOfPosition(PlayerPosition? position) {

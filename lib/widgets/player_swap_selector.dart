@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import '../models/player.dart';
 import 'lineup_display.dart';
 
+typedef GetPlayer = Player Function(PlayerNumber number);
+
 class PlayerSwapSelector extends StatefulWidget {
-  final Players optionsA;
-  final Players optionsB;
+  final List<PlayerNumber> optionsA;
+  final List<PlayerNumber> optionsB;
+  final GetPlayer getPlayer;
   final String title;
 
-  const PlayerSwapSelector({super.key, required this.optionsA, required this.optionsB, required this.title});
+  const PlayerSwapSelector({super.key, required this.optionsA, required this.optionsB, required this.title, required this.getPlayer});
 
   @override
   State<PlayerSwapSelector> createState() => _PlayerSwapSelectorState();
@@ -43,7 +46,7 @@ class _PlayerSwapSelectorState extends State<PlayerSwapSelector> {
                         color: selectedA == widget.optionsA.indexOf(player) ? Colors.amber : Colors.transparent,
                       ),
                       child: PlayerDisplayContainer(
-                        player: player,
+                        player: widget.getPlayer(player),
                         onTap: () {
                           setState(() {
                             selectedA = widget.optionsA.indexOf(player);
@@ -71,7 +74,7 @@ class _PlayerSwapSelectorState extends State<PlayerSwapSelector> {
                         color: selectedB == widget.optionsB.indexOf(player) ? Colors.amber : Colors.transparent,
                       ),
                       child: PlayerDisplayContainer(
-                        player: player,
+                        player: widget.getPlayer(player),
                         onTap: () {
                           setState(() {
                             selectedB = widget.optionsB.indexOf(player);

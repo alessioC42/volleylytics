@@ -4,12 +4,14 @@ import '../models/player.dart';
 import '../models/player_lineup.dart';
 
 typedef OnTapCallback = void Function(int index);
+typedef GetPlayer = Player Function(PlayerNumber number);
 
 class LineupDisplay extends StatelessWidget {
   final PlayerLineup lineup;
   final OnTapCallback onTap;
+  final GetPlayer getPlayer;
 
-  const LineupDisplay({super.key, required this.lineup, required this.onTap});
+  const LineupDisplay({super.key, required this.lineup, required this.onTap, required this.getPlayer});
 
   final borderWidth = 4.0;
   final backgroundColor = Colors.orangeAccent;
@@ -51,13 +53,13 @@ class LineupDisplay extends StatelessWidget {
               children: [
                 Expanded(
                     child: PlayerDisplayContainer(
-                        player: lineup.positions[3], onTap: () => onTap(3))),
+                        player: getPlayer(lineup.positions[3]), onTap: () => onTap(3))),
                 Expanded(
                     child: PlayerDisplayContainer(
-                        player: lineup.positions[2], onTap: () => onTap(2))),
+                        player: getPlayer(lineup.positions[2]), onTap: () => onTap(2))),
                 Expanded(
                     child: PlayerDisplayContainer(
-                        player: lineup.positions[1], onTap: () => onTap(1))),
+                        player: getPlayer(lineup.positions[1]), onTap: () => onTap(1))),
               ],
             ),
           ),
@@ -71,13 +73,13 @@ class LineupDisplay extends StatelessWidget {
               children: [
                 Expanded(
                     child: PlayerDisplayContainer(
-                        player: lineup.positions[4], onTap: () => onTap(4))),
+                        player: getPlayer(lineup.positions[4]), onTap: () => onTap(4))),
                 Expanded(
                     child: PlayerDisplayContainer(
-                        player: lineup.positions[5], onTap: () => onTap(5))),
+                        player: getPlayer(lineup.positions[5]), onTap: () => onTap(5))),
                 Expanded(
                     child: PlayerDisplayContainer(
-                        player: lineup.positions[0], onTap: () => onTap(0))),
+                        player: getPlayer(lineup.positions[0]), onTap: () => onTap(0))),
               ],
             ),
           )
