@@ -76,6 +76,17 @@ class VolleyballMatch {
     return players.firstWhere((player) => player.number == number);
   }
 
+  List<RateAction> getLastRateActions(int count) {
+    List<RateAction> rateActions = [];
+    for (int i = sets.length - 1; i >= 0; i--) {
+      rateActions.addAll(sets[i].actions.reversed);
+      if (rateActions.length >= count) {
+        return rateActions.sublist(0, count);
+      }
+    }
+    return rateActions;
+  }
+
   VolleyballSet get latestSet {
     if (sets.isEmpty) {
       sets.add(VolleyballSet(setNumber: 1));

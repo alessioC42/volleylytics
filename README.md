@@ -8,7 +8,7 @@ Monitor players in game, track their actions and find common mistakes. Basically
 
 - [x] Player management
 - [x] Game management
-- [ ] Game editor
+- [x] Game editor
 - [ ] move to database instead of key/value (most likely sqflite)
 - [ ] Export/Import games/team data
 - [ ] Analytics and statistics dashboard

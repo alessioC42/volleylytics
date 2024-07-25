@@ -27,15 +27,10 @@ class _RateActionDialogState extends State<RateActionDialog> {
   double rating = 2.5;
   RecordAction selectedAction = RecordAction.values.first;
 
-  static Color getRatingColor(double rating) {
-    double x = rating / 5 * 510;
-    int r = (x < 255) ? 255 : 510 - x.toInt();
-    int g = (x > 255) ? 255 : x.toInt();
-    return Color.fromARGB(255, r, g, 0);
-  }
-
   @override
   Widget build(BuildContext context) {
+    Color ratingColor = getRatingColor(rating);
+
     return Dialog.fullscreen(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -79,11 +74,11 @@ class _RateActionDialogState extends State<RateActionDialog> {
                 ),
                 SfSliderTheme(
                     data: SfSliderThemeData(
-                      activeTrackColor: Colors.blue,
+                      activeTrackColor: ratingColor,
                       activeTrackHeight: 10,
                       inactiveTrackHeight: 9,
-                      thumbColor: Colors.blue,
-                      thumbStrokeColor: getRatingColor(rating),
+                      thumbColor: Color.lerp(ratingColor, Colors.blueAccent, 0.3),
+                      thumbStrokeColor: ratingColor,
                       thumbStrokeWidth: 15,
                       thumbRadius: 30,
                       overlayColor: Colors.blue.withOpacity(0.12),
@@ -125,4 +120,11 @@ class _RateActionDialogState extends State<RateActionDialog> {
       ),
     );
   }
+}
+
+Color getRatingColor(double rating) {
+  double x = rating / 5 * 510;
+  int r = (x < 255) ? 255 : 510 - x.toInt();
+  int g = (x > 255) ? 255 : x.toInt();
+  return Color.fromARGB(255, r, g, 0);
 }
