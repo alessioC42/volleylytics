@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="feat: double Back to close a game">
-      <change afterPath="$PROJECT_DIR$/lib/home_page.dart" afterDir="false" />
+    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="WIP: rate_action_dialog.dart">
+      <change afterPath="$PROJECT_DIR$/icon.kitchen.url" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/globals.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/globals.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/editor/game_editor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/editor/game_editor.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/editor/game_setup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/editor/game_setup.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/volleylytics_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/volleylytics_android.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +117,11 @@
       <workItem from="1721292072587" duration="7318000" />
       <workItem from="1721470436757" duration="1813000" />
       <workItem from="1721818524094" duration="1509000" />
-      <workItem from="1721834017680" duration="3414000" />
+      <workItem from="1721834017680" duration="6208000" />
+      <workItem from="1721845791120" duration="9409000" />
+      <workItem from="1721892462919" duration="138000" />
+      <workItem from="1721892612605" duration="405000" />
+      <workItem from="1721915843856" duration="1581000" />
     </task>
     <task id="LOCAL-00001" summary="flutter create">
       <option name="closed" value="true" />
@@ -240,7 +251,39 @@
       <option name="project" value="LOCAL" />
       <updated>1721471819166</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="root game management with intuitive UI">
+      <option name="closed" value="true" />
+      <created>1721837556012</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1721837556012</updated>
+    </task>
+    <task id="LOCAL-00018" summary="libero color is now different on board">
+      <option name="closed" value="true" />
+      <created>1721837976544</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1721837976544</updated>
+    </task>
+    <task id="LOCAL-00019" summary="save entire editor state in VolleyballMatch class as controller like object">
+      <option name="closed" value="true" />
+      <created>1721852070913</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1721852070913</updated>
+    </task>
+    <task id="LOCAL-00020" summary="WIP: rate_action_dialog.dart">
+      <option name="closed" value="true" />
+      <created>1721855192868</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1721855192868</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,7 +317,11 @@
     <MESSAGE value="Player swap logic working" />
     <MESSAGE value="score display/editor implemented and working" />
     <MESSAGE value="feat: double Back to close a game" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: double Back to close a game" />
+    <MESSAGE value="root game management with intuitive UI" />
+    <MESSAGE value="libero color is now different on board" />
+    <MESSAGE value="save entire editor state in VolleyballMatch class as controller like object" />
+    <MESSAGE value="WIP: rate_action_dialog.dart" />
+    <option name="LAST_COMMIT_MESSAGE" value="WIP: rate_action_dialog.dart" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
