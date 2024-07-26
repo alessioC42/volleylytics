@@ -143,7 +143,6 @@ class _GameEditorState extends State<GameEditor> {
   }
 
   void onPlayerTapped(Player player) async {
-    debugPrint('Player tapped: ${player.displayName}');
     RateAction? rateAction = await showDialog(
       context: context,
       builder: (context) {
@@ -158,6 +157,9 @@ class _GameEditorState extends State<GameEditor> {
     debugPrint(widget.match.sets.toString());
     setState(() {
       widget.match.latestSet.actions.add(rateAction);
+      setState(() {
+        lastRateActions = widget.match.getLastRateActions(10);
+      });
     });
   }
 
