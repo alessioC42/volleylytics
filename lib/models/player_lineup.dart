@@ -23,6 +23,10 @@ class PlayerLineup {
     return positions;
   }
 
-  PlayerLineup.fromJson(List<int> json) :
-    positions = json;
+  PlayerLineup.fromJson(List<dynamic> json) :
+    positions = json.map((x) => int.tryParse(x.toString()) ?? -1).toList();
+
+  PlayerLineup copy() {
+    return PlayerLineup(positions: List<PlayerNumber>.from(positions));
+  }
 }

@@ -108,8 +108,8 @@ class _RateActionDialogState extends State<RateActionDialog> {
                 player: widget.player.number,
                 action: selectedAction,
                 rating: rating,
-                score: widget.score,
-                lineup: widget.lineup,
+                score: widget.score.copy(),
+                lineup: widget.lineup.copy(),
               );
               Navigator.of(context).pop(rateAction);
             },

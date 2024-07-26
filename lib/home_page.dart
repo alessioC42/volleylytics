@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
+import 'package:volleylytics/views/analyzer/game_analyzer.dart';
 import 'package:volleylytics/views/editor/game_editor.dart';
 import 'package:volleylytics/views/editor/game_setup.dart';
 import 'package:volleylytics/views/sams/matches_browser_view.dart';
@@ -121,7 +122,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 SlidableAction(
                   icon: Icons.analytics,
                   onPressed: (context) {
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GameAnalyzer(match: match),
+                      ),
+                    );
                   },
                   backgroundColor: Colors.blueAccent,
                 ),

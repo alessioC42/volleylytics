@@ -3,14 +3,12 @@ class VolleyballScore {
   int scoreThem;
   int setScorewe;
   int setScoreThem;
-  int setNumber;
 
   VolleyballScore({
     this.scoreWe = 0,
     this.scoreThem = 0,
     this.setScorewe = 0,
     this.setScoreThem = 0,
-    this.setNumber = 1,
   });
 
   void handleIncrement() {
@@ -89,14 +87,24 @@ class VolleyballScore {
     return false;
   }
 
+  int get setNumber => setScorewe + setScoreThem + 1;
+
   List<int> toJson() {
-    return [scoreWe, scoreThem, setNumber, setScorewe, setScoreThem];
+    return [scoreWe, scoreThem, setScorewe, setScoreThem];
   }
 
-  VolleyballScore.fromJson(List<int> json) :
-    scoreWe = json[0],
-    scoreThem = json[1],
-    setNumber = json[2],
-    setScorewe = json[3],
-    setScoreThem = json[4];
+  VolleyballScore.fromJson(List<dynamic> json) :
+    scoreWe = int.parse(json[0].toString()),
+    scoreThem = int.parse(json[1].toString()),
+    setScorewe = int.parse(json[2].toString()),
+    setScoreThem = int.parse(json[3].toString());
+
+  VolleyballScore copy() {
+    return VolleyballScore(
+      scoreWe: scoreWe,
+      scoreThem: scoreThem,
+      setScorewe: setScorewe,
+      setScoreThem: setScoreThem,
+    );
+  }
 }

@@ -154,7 +154,6 @@ class _GameEditorState extends State<GameEditor> {
       },
     );
     if (rateAction == null) return;
-    debugPrint(widget.match.sets.toString());
     setState(() {
       widget.match.latestSet.actions.add(rateAction);
       setState(() {

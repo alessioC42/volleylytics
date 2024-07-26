@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+
 import '../models/volleyball_match.dart';
 import 'package:localstorage/localstorage.dart';
 
@@ -12,7 +14,11 @@ class MatchProvider {
   void initializeMatches() {
     final String matchesJSON = localStorage.getItem(storageKey) ?? '[]';
     final List<dynamic>? matchesList = jsonDecode(matchesJSON);
-    if (matchesList == null) return;
+
+    if (matchesList == null) {
+      return;
+    }
+
     matches = matchesList
         .map((player) => VolleyballMatch.fromJson(player))
         .toList()
@@ -23,7 +29,7 @@ class MatchProvider {
     if (newMatchesData != null) {
       matches = newMatchesData;
     }
-    final jsonEncoded = jsonEncode(newMatchesData);
+    final jsonEncoded = jsonEncode(matches);
     localStorage.setItem(storageKey, jsonEncoded);
   }
 }

@@ -87,6 +87,14 @@ class VolleyballMatch {
     return rateActions;
   }
 
+  List<RateAction> get allRateActions {
+    List<RateAction> rateActions = [];
+    for (int i = sets.length - 1; i >= 0; i--) {
+      rateActions.addAll(sets[i].actions.reversed);
+    }
+    return rateActions;
+  }
+
   VolleyballSet get latestSet {
     if (sets.isEmpty) {
       sets.add(VolleyballSet(setNumber: 1));
@@ -138,7 +146,7 @@ class VolleyballSet {
 
   VolleyballScore get latestScore {
     if (actions.isEmpty) {
-      return VolleyballScore(scoreThem: 0, scoreWe: 0, setNumber: setNumber);
+      return VolleyballScore(scoreThem: 0, scoreWe: 0, );
     } else {
       return actions.last.score;
     }

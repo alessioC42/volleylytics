@@ -9,21 +9,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="update app icon">
+    <list default="true" id="e732bbe4-6b37-4f3b-8ff7-f833844e669a" name="Changes" comment="show a new rateAction entry instantly">
+      <change afterPath="$PROJECT_DIR$/lib/views/analyzer/game_analyzer.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/analyzer/rate_action_chart.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/player.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/home_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/models/player_lineup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/player_lineup.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/rate_action.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/rate_action.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/models/volleyball_match.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/volleyball_match.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/models/volleyball_score.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/volleyball_score.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/providers/match_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/providers/match_provider.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/providers/player_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/providers/player_provider.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/editor/game_editor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/editor/game_editor.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/players/player_editor_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/players/player_editor_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/players/players_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/players/players_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/lineup_display.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/lineup_display.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/player_swap_selector.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/player_swap_selector.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/rate_action_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/rate_action_dialog.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +59,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/alessio/flutter/bin/cache/dart-sdk&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/alessio/Documents/GitHub/volleylytics/assets/images&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -73,6 +71,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib/views/sams" />
       <recent name="$PROJECT_DIR$/lib/views/players" />
@@ -124,7 +125,10 @@
       <workItem from="1721845791120" duration="9409000" />
       <workItem from="1721892462919" duration="138000" />
       <workItem from="1721892612605" duration="405000" />
-      <workItem from="1721915843856" duration="7369000" />
+      <workItem from="1721915843856" duration="12400000" />
+      <workItem from="1721983572603" duration="1924000" />
+      <workItem from="1721991456224" duration="1919000" />
+      <workItem from="1721996378706" duration="6034000" />
     </task>
     <task id="LOCAL-00001" summary="flutter create">
       <option name="closed" value="true" />
@@ -294,7 +298,31 @@
       <option name="project" value="LOCAL" />
       <updated>1721917563849</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="massively reduce storage and comparison overhead on all datatypes">
+      <option name="closed" value="true" />
+      <created>1721923370167</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1721923370167</updated>
+    </task>
+    <task id="LOCAL-00023" summary="game editor fully implemented and working">
+      <option name="closed" value="true" />
+      <created>1721928267311</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1721928267311</updated>
+    </task>
+    <task id="LOCAL-00024" summary="show a new rateAction entry instantly">
+      <option name="closed" value="true" />
+      <created>1721989394243</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1721989394243</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,7 +361,10 @@
     <MESSAGE value="save entire editor state in VolleyballMatch class as controller like object" />
     <MESSAGE value="WIP: rate_action_dialog.dart" />
     <MESSAGE value="update app icon" />
-    <option name="LAST_COMMIT_MESSAGE" value="update app icon" />
+    <MESSAGE value="massively reduce storage and comparison overhead on all datatypes" />
+    <MESSAGE value="game editor fully implemented and working" />
+    <MESSAGE value="show a new rateAction entry instantly" />
+    <option name="LAST_COMMIT_MESSAGE" value="show a new rateAction entry instantly" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
